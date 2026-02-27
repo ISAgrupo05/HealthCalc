@@ -59,26 +59,6 @@ Para que el proyecto cumpla con estándares de software médico, se deben inclui
 
 * **M2: Peso Corporal Ideal (PCI) o _Ideal Body Weight (IBW)_:** El PCI estima el peso teórico que se asocia con el menor riesgo de mortalidad y una mejor salud para un persona.
 
-    Existen diferentes fórmulas para calcular el PCI:
-
-    1. **Fórmula de Devine (1974)**
-    Es la más extendida en entornos clínicos para ajustar dosis de medicamentos.
-
-        - **Hombres:** 50 kg + [2.3 × (estatura en pulgadas - 60)]
-        - **Mujeres:** 45.5 kg + [2.3 × (estatura en pulgadas - 60)]
-
-    2. **Fórmula de Robinson (1983)**
-    Es una variante de Devine más precisa, dando valores más bajos en mujeres y más altos en hombres. 
-
-        - **Hombres:** 52 kg + [1.9 × (estatura en pulgadas - 60)]
-        - **Mujeres:** 49 kg + [1.7 × (estatura en pulgadas - 60)]
-
-    3. **Fórmula de Hamwi (1964)**
-    Fórmula clásica utilizada por dietistas y nutricionistas debido a su sencillez.
-
-        - **Hombres:** 48.1 kg + [2.7 × (estatura en pulgadas - 60)]
-        - **Mujeres:** 45.4 kg + [2.2 × (estatura en pulgadas - 60)]
-
     4. **Fórmula de Lorentz (1929)**
     Es la fórmula más sencilla de aplicar manualmente ya que utiliza directamente la estatura en centímetros y no requiere conversiones a pulgadas.
 
@@ -86,22 +66,6 @@ Para que el proyecto cumpla con estándares de software médico, se deben inclui
         - **Mujeres:** $PCI = (Estatura en cm - 100) - \frac{Estatura - 150}{2}$
 
     **Nota:** Para convertir la estatura de **cm a pulgadas**, hay que dividir los centímetros entre **2.54**.
-
----
-
-* **M3: Área de Superficie Corporal (ASC) o _Body Surface Area (BSA)_:** El ASC es una medida clínica utilizada para calcular dosis precisas de medicamentos, especialmente en quimioterapia y fluidos intravenosos, y para evaluar la severidad de quemaduras.
-
-    La fórmula más común es la de **Mosteller**:
-
-    * **Fórmula (Mosteller):** $BSA = \sqrt{\frac{\text{altura (cm)} \times \text{peso (kg)}}{3600}}$    
-
----
-
-* **M4: Perímetro Abdominal (PA) o _Waist Circumference_ (WC):** Es la medición lineal de la circunferencia de la cintura. Se considera el indicador clínico directo de grasa visceral más sencillo y aceptado para predecir obesidad abdominal.
-  
-    * **Valores de Referencia (Riesgo Elevado):**  
-      - **Hombres:** $\ge 94\text{ - }102 \text{ cm}$  
-      - **Mujeres:** $\ge 80\text{ - }88 \text{ cm}$
 
 ---
 
@@ -135,95 +99,6 @@ Para que el proyecto cumpla con estándares de software médico, se deben inclui
 
 <details>
 <summary><b>Métricas Metabólicas y Nutricionales</b></summary>
-
-* **M6: Tasa Metabólica Basal (TMB) o _Basal Metabolic Rate (BMR)_:** El TMB calcula la cantidad mínima de energía (calorías) que el cuerpo necesita en reposo absoluto. 
-
-    Existen diferentes fórmulas para calcular el PCI:
-
-    1. **Ecuación de Mifflin-St Jeor**
-    Es actualmente la más precisa para la población general y la que utilizan la mayoría de calculadoras modernas. 
-
-        - **Hombres:**  `TMB = (10 × peso en kg) + (6.25 × altura en cm) - (5 × edad en años) + 5`
-        - **Mujeres:**  `TMB = (10 × peso en kg) + (6.25 × altura en cm) - (5 × edad en años) - 161`
-
-    2. **Ecuación de Harris-Benedict (revisada)**
-    Es el método clásico. La versión original de 1919 fue revisada en 1984 por Roza y Shizgal para mejorar su exactitud.
-
-        - **Hombres:**  `TMB = 88.362 + (13.397 × peso en kg) + (4.799 × altura en cm) - (5.677 × edad en años)`
-        - **Mujeres:**  `TMB = 447.593 + (9.247 × peso en kg) + (3.098 × altura en cm) - (4.330 × edad en años)`
-
-    3. **Ecuación de Katch-McArdle**
-    A diferencia de las anteriores, esta fórmula no distingue entre sexos, sino que utiliza la Masa Corporal Magra (peso sin grasa). Es ideal si conoces tu porcentaje de grasa corporal.
-        - `TMB = 370 + (21.6 × Masa Corporal Magra en kg)`
-            > **Nota:** Masa Magra = Peso total × (1 - % de grasa decimal)
-
-    4. **Ecuación de la OMS (FAO/WHO/UNU)**
-    Utilizada a menudo en estudios de salud pública, divide el cálculo por rangos de edad específicos: 
-
-        | Edad (Años) | Hombres | Mujeres |
-        | :--- | :--- | :--- |
-        | **18 – 30** | `(15.057 × peso) + 692.2` | `(14.818 × peso) + 486.6` |
-        | **30 – 60** | `(11.472 × peso) + 873.1` | `(8.126 × peso) + 845.6` |
-        | **> 60** | `(11.711 × peso) + 587.7` | `(9.082 × peso) + 658.5` |
-
----
-
-* **M7: Gasto Energético Diario Total (GEDT) o _Total Daily Energy Expenditure (TDEE)_:** El TDEE es la cantidad total de calorías que el cuerpo quema en 24 horas. Suma el metabolismo basal (funciones vitales en reposo), la actividad física, la digestión y el movimiento cotidiano. Es esencial para ajustar la nutrición (perder, ganar o mantener peso).
-
-    Para obtener las calorías totales que quemas al día, multiplica tu **TMB** por tu nivel de actividad:
-
-    - **Sedentario** (poco/nada de ejercicio): `TMB × 1.2`
-    - **Ligero** (ejercicio 1-3 días/semanas): `TMB × 1.375`
-    - **Moderado** (ejercicio 3-5 días/semana): `TMB × 1.55`
-    - **Fuerte** (ejercicio 6-7 días/semana): `TMB × 1.725`
-    - **Muy fuerte** (atleta o trabajo físico pesado): `TMB × 1.9`
-
-</details>
-
-<details>
-<summary><b>Métricas Clínicas, Cardiovasculares, y de Función Orgánica</b></summary>
-
-Estas métricas requieren datos de signos vitales o resultados de laboratorio.
-
-* **M8: Presión Arterial Media (PAM) o _Mean Arterial Pressure_ (MAP):** Representa la presión promedio en las arterias de un paciente durante un ciclo cardíaco completo. Se considera un mejor indicador de la perfusión (entrega de sangre) a los órganos vitales que la presión sistólica por sí sola. Un valor mínimo de 60-65 mmHg es necesario para mantener los órganos sanos.
-  
-    **Fórmula:** $PAM = \frac{PAS + 2(PAD)}{3}$  
-    *(Donde PAS = Presión Arterial Sistólica y PAD = Presión Arterial Diastólica)*.
-
---- 
-
-* **M9: Índice de Adiposidad Visceral (VAI) o _Visceral Adiposity Index_ (VAI):** Es un indicador empírico que estima la función del tejido adiposo visceral y el riesgo cardiometabólico. Combina medidas físicas (IMC y CC) con parámetros lipídicos (Triglicéridos y HDL).
-  
-    **Fórmulas:**  
-        - **Hombres:** $VAI = \left( \frac{CC}{39.68 + (1.88 \times IMC)} \right) \times \left( \frac{TG}{1.03} \right) \times \left( \frac{1.31}{HDL} \right)$  
-        - **Mujeres:** $VAI = \left( \frac{CC}{36.58 + (1.89 \times IMC)} \right) \times \left( \frac{TG}{0.81} \right) \times \left( \frac{1.52}{HDL} \right)$  
-    *(Donde CC = Circunferencia de Cintura en cm, TG = Triglicéridos y HDL en mmol/L)*.
-
---- 
-
-* **M10: Tasa de Filtración Glomerular Estimada (eGFR) o _Estimated Glomerular Filtration Rate_ (eGFR):** Es el "estándar de oro" para evaluar qué tan bien están filtrando la sangre los riñones. Es vital para la detección de la Enfermedad Renal Crónica (ERC) y para ajustar dosis de fármacos.
-  
-    **Fórmulas Comunes:**  
-      * **Cockcroft-Gault (Clásica):** $\frac{(140 - \text{edad}) \times \text{peso}}{72 \times \text{creatinina}} \times (0.85 \text{ si es mujer})$.  
-      * **CKD-EPI (Moderna):** Utiliza logaritmos y variables de raza/sexo para mayor precisión (es la recomendada actualmente en software clínico).  
-    * **Entradas necesarias:** Creatinina sérica (mg/dL), edad, sexo y etnia.  
-
---- 
-
-* **M11: Escala NEWS2 o _National Early Warning Score 2_:** Es un sistema de puntuación estandarizado para detectar el deterioro clínico agudo en pacientes adultos. En lugar de una fórmula aritmética simple, es un **sistema de puntos acumulativo** basado en rangos fisiológicos.
-  
-    **Parámetros Evaluados (7):**
-      1. Frecuencia respiratoria.
-      2. Saturación de oxígeno.
-      3. Uso de oxígeno suplementario (Sí/No).
-      4. Presión arterial sistólica.
-      5. Frecuencia cardíaca (Pulso).
-      6. Nivel de conciencia (Escala ACVPU).
-      7. Temperatura.
-    * **Lógica de Software:** El sistema suma puntos (0 a 3) por cada parámetro que se desvíe de lo normal. Un puntaje de 5 o más es una "Alerta Roja" que requiere respuesta urgente.
-
-</details>
-
 
 ## Plan de pruebas
 
