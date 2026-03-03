@@ -261,7 +261,10 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 * **Cálculo correcto:** Se comprueba que, al introducir una altura normal, el resultado sea el esperado matemáticamente.
 * **Protección ante datos imposibles:**
     * El sistema debe rechazar alturas menores a 100 cm o mayores a 300 cm.
-* **Protección ante errores de escritura:** Se verifica que no se permitan valores negativos o iguales a cero.
+* **Protección ante errores de escritura:** 
+    * Se verifica que no se permitan valores negativos o iguales a cero en la altura.
+    * Se verifica que no se introduzcan caracteres distintos de "M" (hombre) o "F" (mujer) en el sexo.
+
 
 </details>
 
@@ -272,7 +275,9 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 * **Protección ante datos imposibles:**
     * El sistema debe rechazar cinturas menores a 45 cm o mayores a 300 cm.
     * El sistema debe rechazar caderas menores a 45 cm o mayores a 300 cm.
-* **Protección ante errores de escritura:** Se verifica que no se permitan valores negativos o iguales a cero.
+* **Protección ante errores de escritura:** 
+    * Se verifica que no se permitan valores negativos o iguales a cero.
+    * Se verifica que no se introduzcan caracteres distintos de "M" (hombre) o "F" (mujer) en el sexo.
 
 </details>
 

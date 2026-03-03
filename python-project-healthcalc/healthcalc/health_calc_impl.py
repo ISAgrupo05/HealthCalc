@@ -29,3 +29,14 @@ class HealthCalcImpl(HealthCalc):
             raise InvalidHealthDataException("Height must be within a possible biological range [0.30-3.00] m.")
             
         return weight / (height ** 2)
+
+
+    def lorentz(self, sex: str, height: float) -> float:
+        if height <= 0:
+            raise InvalidHealthDataException("Height must be positive.")
+        if height < 1.00 or height > 3.00:
+            raise InvalidHealthDataException("Height must be within a possible biological range [1.00-3.00] m.")
+        
+        return 
+        
+    def whr(self, waist:float, hip:float) -> float:
