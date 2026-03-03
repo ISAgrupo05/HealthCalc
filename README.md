@@ -134,6 +134,7 @@ Para que el proyecto cumpla con estándares de software médico, se deben inclui
     | **Mujer** | $\le 0.85$ | Pera (Ginoide) | Bajo / Moderado |
     | **Mujer** | $> 0.85$ | **Manzana (Androide)** | **Alto** |
 
+</details>
 
 <details>
 <summary><b>Métricas Metabólicas y Nutricionales</b></summary>
