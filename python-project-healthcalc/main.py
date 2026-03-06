@@ -1,4 +1,5 @@
 from healthcalc.health_calc_impl import HealthCalcImpl
+from healthcalc.exceptions import InvalidHealthDataException
 
 def main():
     calc = HealthCalcImpl()
@@ -14,6 +15,7 @@ def main():
             except ValueError:
                 print("Value must be a number, try again.")
 
+    
     while not finish:
         answer = input("Do you want to know your Body Mass Index? Y/N \n")
 
@@ -21,13 +23,21 @@ def main():
             answer = input("Your answer must be 'Y' or 'N', try again: \n")
 
         if answer.upper() == "Y":
-            weight = ask_float("Input your weight (kg): \n")
-            height = ask_float("Input your height (m): \n")
+            valid = False
+            while not valid:
+                try:
+                    weight = ask_float("Input your weight (kg): \n")
+                    height = ask_float("Input your height (m): \n")
 
-            bmi = calc.bmi(weight, height)
+                    bmi = calc.bmi(weight, height)
+                    classification = calc.bmi_classification(bmi)
+                    valid = True
+                except InvalidHealthDataException as e:
+                    print(e)
+                    print("Invalid health data, try again.")
 
             print("Your BMI is: ", bmi)
-            print("According to that, your Health Status is: ", calc.bmi_classification(bmi))
+            print("According to that, your Health Status is: ", classification)
 
         answer2 = input("Do you want to know your Ideal Body Weight? Y/N \n")
 
@@ -35,13 +45,19 @@ def main():
             answer2 = input("Your answer must be 'Y' or 'N', try again: \n")
 
         if answer2.upper() == "Y":
-            height = ask_float("Input your height (m): \n")
-            sex = input("Input your sex ('M' for male or 'F' for female): \n")
+            valid2 = False
+            while not valid2:
+                try:
+                    height = ask_float("Input your height (m): \n")
+                    sex = input("Input your sex ('M' for male or 'F' for female): \n")
 
-            while sex.upper() != "M" and sex.upper() != "F":
-                sex = input("Your sex must be either 'M' (male) or 'F' (female), try again: \n")
+                    while sex.upper() != "M" and sex.upper() != "F":
+                        sex = input("Your sex must be either 'M' (male) or 'F' (female), try again: \n")
 
-            ibw = calc.lorentz(sex.upper(), height)
+                    ibw = calc.lorentz(sex.upper(), height)
+                    valid2 = True
+                except InvalidHealthDataException:
+                    print("Invalid health data, try again.")
 
             print("Your Ideal Body Weight is: ", ibw, " kg.")
 
@@ -51,17 +67,24 @@ def main():
             answer3 = input("Your answer must be 'Y' or 'N', try again: \n")
 
         if answer3.upper() == "Y":
-            waist = ask_float("Input your waist perimeter (m): \n")
-            hip = ask_float("Input your hip perimeter (m): \n")
-            sex = input("Input your sex ('M' for male or 'F' for female): \n")
+            valid3 = False
+            while not valid3:
+                try:
+                    waist = ask_float("Input your waist perimeter (m): \n")
+                    hip = ask_float("Input your hip perimeter (m): \n")
+                    sex = input("Input your sex ('M' for male or 'F' for female): \n")
 
-            while sex.upper() != "M" and sex.upper() != "F":
-                sex = input("Your sex must be either 'M' (male) or 'F' (female), try again: \n")
+                    while sex.upper() != "M" and sex.upper() != "F":
+                        sex = input("Your sex must be either 'M' (male) or 'F' (female), try again: \n")
 
-            whr = calc.whr(waist, hip)
+                    whr = calc.whr(waist, hip)
+                    classification = calc.whr_classification(sex, whr)
+                    valid3 = True
+                except InvalidHealthDataException:
+                    print("Invalid health data, try again.")
 
             print("Your Waist-to-Hip Ratio is: ", whr)
-            print("According to that, your body morfology is: ", calc.whr_classification(sex, whr))
+            print("According to that, your body morfology is: ", classification)
 
         answer4 = input("Are you finished using your Health Calculator? Y/N \n")
 

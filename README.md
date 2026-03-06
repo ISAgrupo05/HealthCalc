@@ -238,7 +238,7 @@ Para garantizar que la calculadora sea fiable y segura, se han definido los sigu
 * **Cálculo correcto:** Se comprueba que, al introducir un peso y altura normales, el resultado sea el esperado matemáticamente.
 * **Protección ante datos imposibles:**
     * El sistema debe rechazar pesos menores a 1 kg o mayores a 700 kg.
-    * El sistema debe rechazar alturas menores a 30 cm o mayores a 300 cm.
+    * El sistema debe rechazar alturas menores a 0.30 m o mayores a 3.00 m.
 * **Protección ante errores de escritura:** Se verifica que no se permitan valores negativos o iguales a cero.
 
 </details>
@@ -260,7 +260,7 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 
 * **Cálculo correcto:** Se comprueba que, al introducir una altura normal, el resultado sea el esperado matemáticamente.
 * **Protección ante datos imposibles:**
-    * El sistema debe rechazar alturas menores a 100 cm o mayores a 300 cm.
+    * El sistema debe rechazar alturas menores a 1.00 m o mayores a 3.00 m.
 * **Protección ante errores de escritura:** 
     * Se verifica que no se permitan valores negativos o iguales a cero en la altura.
     * Se verifica que no se introduzcan caracteres distintos de "M" (hombre) o "F" (mujer) en el sexo.
@@ -273,8 +273,8 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 
 * **Cálculo correcto:** Se comprueba que, al introducir unas medidas de cintura y cadera normales, el resultado sea el esperado matemáticamente.
 * **Protección ante datos imposibles:**
-    * El sistema debe rechazar cinturas menores a 45 cm o mayores a 300 cm.
-    * El sistema debe rechazar caderas menores a 45 cm o mayores a 300 cm.
+    * El sistema debe rechazar cinturas menores a 0.45 m o mayores a 3.00 m.
+    * El sistema debe rechazar caderas menores a 0.45 m o mayores a 3.00 m.
 * **Protección ante errores de escritura:** 
     * Se verifica que no se permitan valores negativos o iguales a cero.
     * Se verifica que no se introduzcan caracteres distintos de "M" (hombre) o "F" (mujer) en el sexo.
