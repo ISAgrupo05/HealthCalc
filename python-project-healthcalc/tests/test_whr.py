@@ -55,7 +55,7 @@ class TestWHR:
             self.health_calc.whr(waist, hip)
 
     # --- Tests de Límites e Invalidación para el WHR ---
-      @pytest.mark.parametrize("waist", [0.44, 3.01])
+    @pytest.mark.parametrize("waist", [0.44, 3.01])
     def test_whr_cintura_fuera_rango(self, waist):
         with pytest.raises(InvalidHealthDataException):
             self.health_calc.whr(waist, 100.0)
