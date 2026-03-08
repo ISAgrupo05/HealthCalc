@@ -62,8 +62,9 @@ class TestWHR:
 
     @pytest.mark.parametrize("hip", [0.44, 3.01])
     def test_whr_cadera_fuera_rango(self, hip):
+        # use a valid waist to ensure the hip-range check is reached
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.whr(100.0, hip)
+            self.health_calc.whr(1.0, hip)
 
 
 
@@ -72,39 +73,33 @@ class TestWHR:
     @pytest.mark.parametrize(
         "sex,whr,expected",
         [
-            ("M", 0.90, "Pear"),
-            ("M", 0.85, "Pear"),
-            ("M", 0.91, "Apple"),
-            ("M", 1.50, "Apple"),
-            ("F", 0.85, "Pear"),
-            ("F", 0.80, "Pear"),
-            ("F", 0.86, "Apple"),
-            ("F", 1.00, "Apple"),
+            ("M", 0.90, "Pear"), ("M", 0.85, "Pear"),
+            ("M", 0.91, "Apple"), ("M", 1.50, "Apple"),
+            ("F", 0.85, "Pear"), ("F", 0.80, "Pear"),
+            ("F", 0.86, "Apple"), ("F", 1.00, "Apple"),
         ],
-        ids=lambda t: f"{t[0]} WHR={t[1]} -> {t[2]}",
     )
-    def test_whr_classification_valida(self, sex: str, whr: float, expected: str):
+    def test_whr_classification_valida(self, sex, whr, expected):
         assert self.health_calc.whr_classification(sex, whr) == expected
-
-
 
 
     # --- Tests de Límites e Invalidación para la clasificación WHR ---
 
-    @pytest.mark.parametrize("sex, whr", [("M", -0.85), ("F", -0.70), ("M", -0.90)], ids=lambda x: f"WHR negativo: {x}")
-    def test_whr_classification_minimo_imposible(self, whr: float):
+    @pytest.mark.parametrize("sex, whr", [("M", -0.85), ("F", -0.70), ("M", -0.90)])
+    def test_whr_classification_minimo_imposible(self, sex, whr: float):
         """Lanzar excepción cuando el WHR es negativo."""
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.whr_classification(whr)
+            self.health_calc.whr_classification(sex, whr)
 
-    @pytest.mark.parametrize("sex, whr", [1.01, 1.50, 2.00], ids=lambda x: f"WHR máximo extremo: {x}")
-    def test_whr_classification_maximo_imposible(self, whr: float):
+    @pytest.mark.parametrize("sex, whr", [("M", 5.01), ("F", 10.0), ("M", 100.0)])
+    def test_whr_classification_excesivo(self, sex, whr: float):
         """Lanzar excepción cuando el WHR es extremadamente alto."""
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.whr_classification(whr)
+            self.health_calc.whr_classification(sex, whr)
 
-    @pytest.mark.parametrize("sex", ["X", "", "Male"], ids=lambda x: f"Sexo inválido: '{x}'")
-    def test_whr_classification_sexo_invalido(self, sex: str):
+    @pytest.mark.parametrize("sex",["X", " ", "Male"], ids=lambda x: f"Sexo inválido: '{x}'")
+    
+    def test_whr_classification_sexo_invalido(self, sex):
         """Lanzar excepción cuando el sexo es inválido."""
         whr = 0.85
 
