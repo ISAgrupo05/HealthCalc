@@ -355,6 +355,6 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 - Insertar los enlaces de los ficheros .txt de cada caso de uso de las metricas de p1
 
  [Caso de Uso: BMI](doc/Caso_uso_BMI.txt)
- [Caso de Uso: WHR] (doc/Caso_Uso_WHR.txt)
+ [Caso de Uso: WHR](doc/Caso_Uso_WHR.txt)
 
 </details>
