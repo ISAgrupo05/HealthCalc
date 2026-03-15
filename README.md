@@ -181,6 +181,26 @@ Para que el proyecto cumpla con estándares de software médico, se deben inclui
     - **Fuerte** (ejercicio 6-7 días/semana): `TMB × 1.725`
     - **Muy fuerte** (atleta o trabajo físico pesado): `TMB × 1.9`
 
+---
+
+* **M12: Malnutrition Universal Screening Tool (MUST):** El MUST es un instrumento de cribado clínico que permite identificar a adultos malnutridos, con riesgo de desnutrición u obesos. Se mide mediante las siguientes puntuaciones:
+
+    1. **Puntuación del IMC:**
+        - IMC > 20 = 0 puntos
+        - IMC entre 18.5-20 = 1 puntos
+        - IMC < 18.5 = 2 puntos
+    2. **Puntuación por el porcentaje de pérdida de peso en los últimos 3-6 meses:**
+        - < 5% = 0 puntos
+        - Entre 5-10 = 1 puntos
+        - > 10 = 2 puntos
+    3. **Puntuación del efecto de las enfermedades agudas:**
+        - Si el paciente está muy enfermo y no ha habido, o es probable que no vaya a haber, aporte nutricional durante más de 5 días = 2 puntos
+
+Al sumar las puntuaciones, se puede clasificar el riesgo global de malnutrición:
+    - 0 = Riesgo bajo, recomendada asistencia clínica habitual.
+    - 1 = Riesgo intermedio, recomendada observación.
+    - 2 o más = Riesgo alto, recomendada intervención lo antes posible.
+    
 </details>
 
 <details>
