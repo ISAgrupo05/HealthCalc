@@ -198,10 +198,10 @@ Para que el proyecto cumpla con estándares de software médico, se deben inclui
 
 Al sumar las puntuaciones, se puede clasificar el riesgo global de malnutrición:
 
-    - **0** = Riesgo bajo, recomendada asistencia clínica habitual.
-    - **1** = Riesgo intermedio, recomendada observación.
-    - **2 o más** = Riesgo alto, recomendada intervención lo antes posible.
-    
+- **0** = Riesgo bajo, recomendada asistencia clínica habitual.
+- **1** = Riesgo intermedio, recomendada observación.
+- **2 o más** = Riesgo alto, recomendada intervención lo antes posible.
+
 </details>
 
 <details>
