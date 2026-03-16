@@ -1,0 +1,71 @@
+Caso de uso Lorentz: Calcular Peso Ideal/Ideal Body Weight (IBW) con la fórmula de Lorentz
+
+- Actor Principal: Usuario de la calculadora.
+
+- Ámbito (Scope): Calculadora de salud.
+
+- Nivel (Level): Objetivo de usuario.
+
+- Stakeholders e intereses:
+    · Usuario: Obtener un cálculo aproximado de su peso ideal.
+    · App calculadora: Aportar una métrica fiable que el usuario pueda utilizar.
+
+- Precondiciones:
+    -> El usuario debe introducir datos válidos de su altura.
+    -> El usuario debe introducir su sexo biológico en el formato especificado.
+    -> La calculadora debe funcionar correctamente a la hora de realizar cálculos.
+
+- Garantías mínimas:
+    * El usuario puede volver a introducir valores aunque el cálculo no se haya realizado.
+    * El usuario podrá volver a elegir una métrica a calcular a pesar de haberla elegido previamente, o haber obtenido otra.
+
+- Garantía de éxito:
+    * La calculadora obtiene correctamente el Peso Ideal del usuario de acuerdo a la fórmula de Lorentz.
+
+- Disparador: El usuario introduce "Y" como respuesta a la pregunta: "Do you want to know your Ideal Body Weight? Y/N".
+
+
+-   Escenario Principal:
+  
+      1.  El sistema solicita al usuario ingresar su altura en metros.
+  
+      2.  El usuario introduce su altura.
+  
+      3.  El sistema solicita al usuario ingresar su sexo ("M" para male o "F" para female).
+  
+      4.  El usuario ingresa "M" o "F".
+  
+      5.  El sistema calcula y muestra el Peso Ideal del usuario por pantalla.
+  
+      6.  El flujo continúa al siguiente cálculo o finaliza según la respuesta del usuario.
+
+  -   Escenarios alternativos:
+  
+      2a. Altura inválida:
+  
+        -   El usuario ingresa un valor no numérico de altura.
+    
+        -   El sistema muestra "Value must be a number, try again.".
+    
+        -   Se repite la solicitud (paso 2).
+  
+      4a. Sexo inválido:
+  
+        -   El usuario ingresa algo distinto de "M" o "F" (aceptándose como válidas "m" y "f").
+    
+        -   El sistema muestra "Your sex must be either 'M' (male) or 'F' (female), try again.".
+    
+        -   Se repite la solicitud (paso 4).
+  
+      5a. Datos de salud inválidos:
+  
+        -   El sistema obtiene un cálculo de Peso Ideal inválido.
+    
+        -   El sistema muestra "Invalid Health data, try again".
+    
+        -   Se vuelve al paso 1.
+         
+
+
+
+
