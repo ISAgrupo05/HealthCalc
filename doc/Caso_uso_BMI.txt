@@ -23,25 +23,26 @@ Caso de uso BMI: Calcular BMI
 - Disparador: El usuario introduce los valores de peso y altura
 
 - Escenario principal:
-   1. El usuario introduce su peso
-   2. El usuario introduce su altura
-   3. El sistema valida los datos introducidos
-   4. El usuario pulsa el botón de Calcular BMI
-   5. El sistema calcula el BMI
-   6. El sistema muestra el resultado obtenido y su interpretación
+   1. El sistema solicita al usuario ingresar su peso en kilogramos
+   2. El usuario introduce su peso
+   3. El sistema solicita al usuario ingresar altura en metros
+   4. El usuario introduce su altura
+   5. El sistema calcula el BMI y muestra el resultado obtenido y su interpretación por pantalla
+   6. El flujo continúa al siguiente cálculo o finaliza según la respuesta del usuario
 
 - Extensiones:
   1a. Peso inválido
-      · El sistema detecta un valor no numérico, negativo o fuera de rango
-      · El sistema muestra el mensaje: "Peso inválido, inténtelo de nuevo"
+      · El sistema detecta un valor no numérico
+      · El sistema muestra el mensaje: "Value must be a number, try again"
       · Vuelve al paso 1
 
   2a. Altura inválida
-      · El sistema detecta un valor no numérico, negativo o fuera de rango
-      · El sistema muestra el mensaje: "Altura inválida, inténtelo de nuevo"
-      · Vuelve al paso 2
+      · El sistema detecta un valor no numérico
+      · El sistema muestra el mensaje: "Value must be a number, try again"
+      · Vuelve al paso 1
 
-  3a. Error de conexión o fallo interno
-      · El sistema informa: "No se puede realizar el cálculo en este momento"
+  5a. Datos de salud inválidos:
+      · El sistema obtiene un cálculo de BMI inválido (números negativos o fuera de rango)
+      · El sistema muestra "Invalid Health data, try again"
       · Vuelve al paso 1
  
