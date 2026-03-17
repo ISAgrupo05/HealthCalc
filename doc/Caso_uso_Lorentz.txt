@@ -47,7 +47,7 @@ Caso de uso Lorentz: Calcular Peso Ideal/Ideal Body Weight (IBW) con la fórmula
     
         -   El sistema muestra "Value must be a number, try again.".
     
-        -   Se repite la solicitud (paso 2).
+        -   Se repite la solicitud (paso 1).
   
       4a. Sexo inválido:
   
@@ -55,11 +55,11 @@ Caso de uso Lorentz: Calcular Peso Ideal/Ideal Body Weight (IBW) con la fórmula
     
         -   El sistema muestra "Your sex must be either 'M' (male) or 'F' (female), try again.".
     
-        -   Se repite la solicitud (paso 4).
+        -   Se repite la solicitud (paso 3).
   
       5a. Datos de salud inválidos:
   
-        -   El sistema obtiene un cálculo de Peso Ideal inválido.
+        -   El sistema obtiene un cálculo de Peso Ideal inválido (números negativos o fuera de rango).
     
         -   El sistema muestra "Invalid Health data, try again".
     
