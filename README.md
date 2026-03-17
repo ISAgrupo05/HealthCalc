@@ -372,7 +372,7 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 <details>
 <summary><b>Casos de Uso</b></summary>
 
-- ![Diagrama de Casos de Uso](doc/Casos_de_Uso_All_Must_Coloreados.png)
+![Diagrama de Casos de Uso](doc/Casos_de_Uso_All_Must_Coloreados.png)
 - [Caso de Uso: BMI](doc/Caso_uso_BMI.txt)
 - [Caso de Uso: WHR](doc/Caso_Uso_WHR.txt)
 - [Caso de Uso: IBW](doc/Caso_uso_Lorentz.txt)
