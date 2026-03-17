@@ -1,4 +1,4 @@
-Caso de uso WHR: Calcular Ratio cintura-cadera
+ Caso de uso WHR: Calcular Ratio cintura-cadera
 
   -   Actor Principal: Usuario de la calculadora.
   
@@ -16,7 +16,7 @@ Caso de uso WHR: Calcular Ratio cintura-cadera
   
       ·   El usuario debe introducir un sexo válido.
   
-      ·   La calculadora debe funcionar correctamente a la hora de realizar cálculos.
+      ·   La calculadora debe contar con el módulo de WHR.
   
   -   Garantías mínimas:
   
@@ -75,7 +75,7 @@ Caso de uso WHR: Calcular Ratio cintura-cadera
   
       7a. Datos de salud inválidos:
   
-        -   El sistema obtiene un cálculo de WHR inválido.
+        -   El sistema obtiene un cálculo de WHR inválido, por valores negativos o medidas biológicamente imposibles.
     
         -   El sistema muestra "Invalid Health data, try again".
     
