@@ -45,16 +45,22 @@ class HealthCalcImpl(HealthCalc):
             return (height*100 - 100) - ((height*100 - 150)/2)
         
     def whr(self, waist:float, hip:float) -> float:
-        if waist <= 0:
+        try:
+            waist_value = float(waist)
+            hip_value = float(hip)
+        except (TypeError, ValueError):
+            raise InvalidHealthDataException("Waist and hip must be numeric values.")
+
+        if waist_value <= 0:
             raise InvalidHealthDataException("Waist perimeter must be positive.")
-        if hip <= 0:
+        if hip_value <= 0:
             raise InvalidHealthDataException("Hip perimeter must be positive.")
-        if waist < 0.45 or waist > 3.00:
+        if waist_value < 0.45 or waist_value > 3.00:
             raise InvalidHealthDataException("Waist perimeter must be within a possible biological range [0.45-3.00] m.")
-        if hip < 0.45 or hip > 3.00:
+        if hip_value < 0.45 or hip_value > 3.00:
             raise InvalidHealthDataException("Hip perimeter must be within a possible biological range [0.45-3.00] m.")
 
-        return waist/hip
+        return waist_value / hip_value
     
     def whr_classification(self, sex: str, whr: float) -> str:
         if whr < 0:
