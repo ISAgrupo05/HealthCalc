@@ -25,3 +25,36 @@ class HealthCalc(ABC):
         :raises InvalidHealthDataException: If data is out of range
         """
         pass
+
+    @abstractmethod
+    def lorentz(self, sex: str, height: float) -> float:
+        """Calculate the Ideal Body Weight (IBW).
+        
+        :param sex: String Sex (M/F)
+        :param height: Height (m)
+        :return: Lorentz value (kg)
+        :raises InvalidHealthDataException: If data is out of range
+        """
+        pass
+
+    @abstractmethod
+    def whr(self, waist: float, hip: float) -> float:
+        """Calculate the Waist-to-Hip Ratio (WHR).
+        
+        :param waist: Waist (m)
+        :param hip: Hip (m)
+        :return: WHR value
+        :raises InvalidHealthDataException: If data is out of range
+        """
+        pass
+
+    @abstractmethod
+    def whr_classification(self, sex: str, whr: float) -> str:
+        """Calculate the WHR classification of a person.
+        
+        :param sex: String Sex (M/F)
+        :param whr: WHR value
+        :return: String Classification
+        :raises InvalidHealthDataException: If data is out of range
+        """
+        pass
