@@ -5,49 +5,56 @@ Feature: Cálculo del IBW
 
 Background:
 	Given tengo el módulo del cálculo de IBW
-	and se ha elegido la métrica en la calculadora de salud
+	and se ha elegido la métrica IBW en la calculadora de salud
 
 @ErrorHandling
 Scenario: Cálculo de IBW con sexo inválido
 	Given el usuario ingresa un sexo inválido
 		and el usuario ingresa una altura válida
 	When se calcula el peso ideal corporal
-	Then debe lanzarse una excepción
+	Then debe lanzarse una excepción en el cálculo de IBW
 
 @ErrorHandling
 Scenario: Cálculo de IBW con altura anumérica
 	Given el usuario ingresa un sexo válido
 		and el usuario ingresa una altura anumérica
 	When se calcula el peso ideal corporal
-	Then debe lanzarse una excepción
+	Then debe lanzarse una excepción en el cálculo de IBW
 
 @ErrorHandling
 Scenario: Cálculo de IBW con altura cero
 	Given el usuario ingresa un sexo válido
 	and el usuario ingresa una altura cero
 	When se calcula el peso ideal corporal
-	Then debe lanzarse una excepción
+	Then debe lanzarse una excepción en el cálculo de IBW
 
 @ErrorHandling
 Scenario: Cálculo de IBW con altura negativa
 	Given el usuario ingresa un sexo válido
 		and el usuario ingresa una altura negativa
 	When se calcula el peso ideal corporal
-	Then debe lanzarse una excepción
+	Then debe lanzarse una excepción en el cálculo de IBW
 
 @ErrorHandling
 Scenario: Cálculo de IBW con altura por debajo del rango biológico
 	Given el usuario ingresa un sexo válido
 		and el usuario ingresa una altura por debajo del rango biológico
 	When se calcula el peso ideal corporal
-	Then debe lanzarse una excepción
+	Then debe lanzarse una excepción en el cálculo de IBW
 
 @ErrorHandling
 Scenario: Cálculo de IBW con altura por encima del rango biológico
 	Given el usuario ingresa un sexo válido
 		and el usuario ingresa una altura por encima del rango biológico
 	When se calcula el peso ideal corporal
-	Then debe lanzarse una excepción
+	Then debe lanzarse una excepción en el cálculo de IBW
+
+@Performance
+Scenario: Cálculo de WHR con valores normales
+	Given el usuario ingresa el sexo mujer
+		and el usuario ingresa un valor de altura de 1.50
+	When se calcula el peso ideal corporal
+	Then el resultado debe ser 50.0
 
 Scenario Outline: Cálculo de IBW con valores de altura y sexo válidos
 
