@@ -12,28 +12,28 @@ Scenario: Clasificación con WHR negativo
 	Given el usuario introduce un sexo válido
 		and el WHR calculado es negativo
 	When se obtiene la clasificación morfológica
-	Then se debe lanzar una excepción
+	Then se debe lanzar una excepción en la clasificación de WHR
 
 @ErrorHandling
 Scenario: Clasificación con WHR exorbitante
 	Given el usuario introduce un sexo válido
 		and el WHR calculado es exorbitante
 	When se obtiene la clasificación morfológica
-	Then se debe lanzar una excepción
+	Then se debe lanzar una excepción en la clasificación de WHR
 
 @ErrorHandling
 Scenario: Clasificación con sexo inválido
 	Given el usuario introduce un sexo inválido
 		and el WHR calculado es válido
 	When se obtiene la clasificación morfológica
-	Then se debe lanzar una excepción
+	Then se debe lanzar una excepción en la clasificación de WHR
 
 
 Scenario Outline: Clasificación con sexo y WHR normales
 	Given el usuario introduce un sexo <sex>
 		and el WHR calculado es <whr>
 	When se obtiene la clasificación morfológica
-	Then el resultado debe ser <result>
+	Then el resultado de la clasificación WHR debe ser <result>
 
 Examples:
 | sex | whr  | result  |

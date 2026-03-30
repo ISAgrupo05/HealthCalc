@@ -120,21 +120,21 @@ def step_impl(context):
 
 
 #----------------------clausula THEN ------------------------
-@then(u'se debe lanzar una excepción')
+@then(u'se debe lanzar una excepción en la clasificación de WHR')
 def step_impl(context):
     assert context.exception , "Se esperaba una excepción, pero no se lanzó ninguna."
 
-@then(u'el resultado debe ser Pear')
+@then(u'el resultado de la clasificación WHR debe ser Pear')
 def step_impl(context):
     expected = "Pear"
     assert context.result == expected, f"Se esperaba '{expected}', pero se obtuvo '{context.result}'."
 
-@then(u'el resultado debe ser Apple')
+@then(u'el resultado de la clasificación WHR debe ser Apple')
 def step_impl(context):
     expected = "Apple"
     assert context.result == expected, f"Se esperaba '{expected}', pero se obtuvo '{context.result}'."
 
-@then(u'el resultado debe ser {resultado: s}')
+@then(u'el resultado de la clasificación WHR debe ser {resultado: s}')
 def step_impl(context, resultado):
     expected = context.result
-    assert expected == resultado == True, f"Se esperaba '{resultado}', pero se obtuvo '{expected}'." 
+    assert expected == resultado, f"Se esperaba '{resultado}', pero se obtuvo '{expected}'." 

@@ -9,7 +9,7 @@ from behave import step
 def step_impl(context):
     context.health_calc = HealthCalcImpl()
 
-@given(u'se ha elegido la métrica en la calculadora de salud')
+@given(u'se ha elegido la métrica WHR en la calculadora de salud')
 def step_impl(context):
     pass  # No se requiere acción específica para esta etapa en el contexto de la prueba
 
@@ -101,11 +101,11 @@ def step_impl(context):
 
 #--------------clausula THEN-----------------
 
-@then(u'debe lanzarse una excepción')
+@then(u'debe lanzarse una excepción en el cálculo de WHR')
 def step_impl(context):  
     assert context.exception, "Se esperaba una excepción pero no se lanzó ninguna."
 
-@then(u'el resultado debe ser {resultado: f}')
+@then(u'el resultado del WHR debe ser {resultado: f}')
 def step_impl(context, resultado):
     expected = float(resultado)
     assert abs(context.result - expected) < 0.01, f"Se esperaba un resultado de {resultado} pero se obtuvo {context.result}"

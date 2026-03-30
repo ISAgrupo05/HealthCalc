@@ -12,7 +12,7 @@ Scenario: Cálculo de BMI con peso anumérico
 	Given el usuario ingresa un valor de peso anumérico
 		and el usuario ingresa un valor de altura válido
 	When se calcula el índice de masa corporal
-	Then debe lanzarse una excepción
+	Then debe lanzarse una excepción en el cálculo de BMI
 
 @ErrorHandling
 Scenario: Cálculo de BMI con altura anumérica

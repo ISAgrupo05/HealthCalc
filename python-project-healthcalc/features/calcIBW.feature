@@ -50,18 +50,18 @@ Scenario: Cálculo de IBW con altura por encima del rango biológico
 	Then debe lanzarse una excepción en el cálculo de IBW
 
 @Performance
-Scenario: Cálculo de WHR con valores normales
+Scenario: Cálculo de IBW con valores normales
 	Given el usuario ingresa el sexo mujer
 		and el usuario ingresa un valor de altura de 1.50
 	When se calcula el peso ideal corporal
-	Then el resultado debe ser 50.0
+	Then el resultado del IBW debe ser 50.0
 
 Scenario Outline: Cálculo de IBW con valores de altura y sexo válidos
 
 	Given el usuario ingresa un valor de estatura <estatura>
 		and el usuario ingresa un valor de sexo <sexo>
 	When se calcula el peso ideal corporal
-	Then el resultado debe ser <resultado>
+	Then el resultado del IBW debe ser <resultado>
 
 	Examples:
 		|  altura   |  sexo    |  resultado  |
