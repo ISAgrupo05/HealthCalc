@@ -1,7 +1,7 @@
 Feature: Obtener la clasificación BMI de una persona
-	Como usuario de la calculadora
-	Quiero obtener mi clasificación BMI
-	Para conocer mi estado de salud
+	As usuario de la calculadora
+	I want obtener mi clasificación BMI
+	So that conocer mi estado de salud
 
 Background:
 	Given tengo el módulo de clasificación de BMI
@@ -19,7 +19,7 @@ Scenario: Clasificación con BMI exorbitante
 	When se obtiene la clasificación BMI
 	Then se debe lanzar una excepción en la clasificación BMI
 
-Scenario Outline: Clasificación con valores normales de BMI
+Scenario Outline: Clasificación BMI con valores normales de BMI
 	Given el BMI calculado es <bmi>
 	When se obtiene la clasificación BMI
 	Then el resultado de la clasificación BMI debe ser <result>
