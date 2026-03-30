@@ -96,7 +96,7 @@ Scenario: Cálculo de BMI con valores normales
 	Given el usuario ingresa un valor de peso 45
 		and el usuario ingresa un valor de altura 1.50
 	When se calcula el índice de masa corporal
-	Then el resultado debe ser 20.0
+	Then el resultado del BMI debe ser 20.0
 
 
 Scenario Outline: Cálculo de BMI con valores de peso y altura válidos
