@@ -1,10 +1,212 @@
-# Behave Test Results
+# Behave Test Results - calcIBW.feature
 
 ## Summary
-- **Features**: 3 passed, 0 failed, 2 error, 0 skipped
-- **Scenarios**: 76 passed, 0 failed, 19 error, 0 skipped
-- **Steps**: 489 passed, 0 failed, 1 error, 36 skipped, 34 undefined
-- **Time**: 0min 0.269s
+- **Features**: 1 passed, 0 failed, 0 skipped
+- **Scenarios**: 23 passed, 0 failed, 0 skipped
+- **Steps**: 138 passed, 0 failed, 0 skipped
+- **Time**: 0min 0.158s
+
+## Feature: Cálculo del IBW
+
+**Description**: 
+- As usuario de la calculadora
+- I want calcular el peso ideal corporal
+- So that conocer mi estado de salud mediante la métrica elegida
+
+### Error Handling Scenarios
+
+#### Scenario 1: Cálculo de IBW con sexo inválido
+- ✅ Given tengo el módulo del cálculo de IBW (0.001s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.000s)
+- ✅ Given el usuario ingresa un sexo inválido (0.002s)
+- ✅ And el usuario ingresa una altura válida (0.001s)
+- ✅ When se calcula el peso ideal corporal (0.001s)
+- ✅ Then debe lanzarse una excepción en el cálculo de IBW (0.001s)
+
+#### Scenario 2: Cálculo de IBW con altura anumérica
+- ✅ Given tengo el módulo del cálculo de IBW (0.001s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.000s)
+- ✅ Given el usuario ingresa un sexo válido (0.001s)
+- ✅ And el usuario ingresa una altura anumérica (0.001s)
+- ✅ When se calcula el peso ideal corporal (0.001s)
+- ✅ Then debe lanzarse una excepción en el cálculo de IBW (0.002s)
+
+#### Scenario 3: Cálculo de IBW con altura cero
+- ✅ Given tengo el módulo del cálculo de IBW (0.001s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.000s)
+- ✅ Given el usuario ingresa un sexo válido (0.001s)
+- ✅ And el usuario ingresa una altura cero (0.001s)
+- ✅ When se calcula el peso ideal corporal (0.001s)
+- ✅ Then debe lanzarse una excepción en el cálculo de IBW (0.001s)
+
+#### Scenario 4: Cálculo de IBW con altura negativa
+- ✅ Given tengo el módulo del cálculo de IBW (0.001s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.002s)
+- ✅ Given el usuario ingresa un sexo válido (0.001s)
+- ✅ And el usuario ingresa una altura negativa (0.001s)
+- ✅ When se calcula el peso ideal corporal (0.001s)
+- ✅ Then debe lanzarse una excepción en el cálculo de IBW (0.001s)
+
+#### Scenario 5: Cálculo de IBW con altura por debajo del rango biológico
+- ✅ Given tengo el módulo del cálculo de IBW (0.001s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.000s)
+- ✅ Given el usuario ingresa un sexo válido (0.001s)
+- ✅ And el usuario ingresa una altura por debajo del rango biológico (0.001s)
+- ✅ When se calcula el peso ideal corporal (0.001s)
+- ✅ Then debe lanzarse una excepción en el cálculo de IBW (0.001s)
+
+#### Scenario 6: Cálculo de IBW con altura por encima del rango biológico
+- ✅ Given tengo el módulo del cálculo de IBW (0.001s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.000s)
+- ✅ Given el usuario ingresa un sexo válido (0.001s)
+- ✅ And el usuario ingresa una altura por encima del rango biológico (0.001s)
+- ✅ When se calcula el peso ideal corporal (0.001s)
+- ✅ Then debe lanzarse una excepción en el cálculo de IBW (0.001s)
+
+### Performance Scenario
+
+#### Scenario 7: Cálculo de IBW con valores normales
+- ✅ Given tengo el módulo del cálculo de IBW (0.001s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.001s)
+- ✅ Given el usuario ingresa un sexo F (0.002s)
+- ✅ And el usuario ingresa una altura de 1.50 (0.001s)
+- ✅ When se calcula el peso ideal corporal (0.001s)
+- ✅ Then el resultado del IBW debe ser 50.0 (0.002s)
+
+### Scenario Outline: Cálculo de IBW con valores de altura y sexo válidos
+
+#### Test Case 1 (M, 1.00, 12.5)
+- ✅ Given tengo el módulo del cálculo de IBW (0.001s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.003s)
+- ✅ Given el usuario ingresa un sexo M (0.001s)
+- ✅ And el usuario ingresa una altura 1.00 (0.001s)
+- ✅ When se calcula el peso ideal corporal (0.001s)
+- ✅ Then el resultado del IBW debe ser 12.5 (0.001s)
+
+#### Test Case 2 (F, 1.00, 25.0)
+- ✅ Given tengo el módulo del cálculo de IBW (0.001s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.001s)
+- ✅ Given el usuario ingresa un sexo F (0.003s)
+- ✅ And el usuario ingresa una altura 1.00 (0.006s)
+- ✅ When se calcula el peso ideal corporal (0.002s)
+- ✅ Then el resultado del IBW debe ser 25.0 (0.001s)
+
+#### Test Case 3 (M, 1.50, 50.0)
+- ✅ Given tengo el módulo del cálculo de IBW (0.001s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.001s)
+- ✅ Given el usuario ingresa un sexo M (0.003s)
+- ✅ And el usuario ingresa una altura 1.50 (0.001s)
+- ✅ When se calcula el peso ideal corporal (0.001s)
+- ✅ Then el resultado del IBW debe ser 50.0 (0.001s)
+
+#### Test Case 4 (F, 1.50, 50.0)
+- ✅ Given tengo el módulo del cálculo de IBW (0.001s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.001s)
+- ✅ Given el usuario ingresa un sexo F (0.001s)
+- ✅ And el usuario ingresa una altura 1.50 (0.001s)
+- ✅ When se calcula el peso ideal corporal (0.001s)
+- ✅ Then el resultado del IBW debe ser 50.0 (0.003s)
+
+#### Test Case 5 (M, 1.60, 57.5)
+- ✅ Given tengo el módulo del cálculo de IBW (0.001s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.002s)
+- ✅ Given el usuario ingresa un sexo M (0.001s)
+- ✅ And el usuario ingresa una altura 1.60 (0.001s)
+- ✅ When se calcula el peso ideal corporal (0.001s)
+- ✅ Then el resultado del IBW debe ser 57.5 (0.001s)
+
+#### Test Case 6 (F, 1.60, 55.0)
+- ✅ Given tengo el módulo del cálculo de IBW (0.002s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.001s)
+- ✅ Given el usuario ingresa un sexo F (0.001s)
+- ✅ And el usuario ingresa una altura 1.60 (0.001s)
+- ✅ When se calcula el peso ideal corporal (0.002s)
+- ✅ Then el resultado del IBW debe ser 55.0 (0.001s)
+
+#### Test Case 7 (M, 1.70, 65.0)
+- ✅ Given tengo el módulo del cálculo de IBW (0.001s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.001s)
+- ✅ Given el usuario ingresa un sexo M (0.001s)
+- ✅ And el usuario ingresa una altura 1.70 (0.001s)
+- ✅ When se calcula el peso ideal corporal (0.002s)
+- ✅ Then el resultado del IBW debe ser 65.0 (0.001s)
+
+#### Test Case 8 (F, 1.70, 60.0)
+- ✅ Given tengo el módulo del cálculo de IBW (0.003s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.001s)
+- ✅ Given el usuario ingresa un sexo F (0.002s)
+- ✅ And el usuario ingresa una altura 1.70 (0.001s)
+- ✅ When se calcula el peso ideal corporal (0.001s)
+- ✅ Then el resultado del IBW debe ser 60.0 (0.001s)
+
+#### Test Case 9 (M, 1.80, 72.5)
+- ✅ Given tengo el módulo del cálculo de IBW (0.001s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.001s)
+- ✅ Given el usuario ingresa un sexo M (0.001s)
+- ✅ And el usuario ingresa una altura 1.80 (0.001s)
+- ✅ When se calcula el peso ideal corporal (0.001s)
+- ✅ Then el resultado del IBW debe ser 72.5 (0.001s)
+
+#### Test Case 10 (F, 1.80, 65.0)
+- ✅ Given tengo el módulo del cálculo de IBW (0.002s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.001s)
+- ✅ Given el usuario ingresa un sexo F (0.001s)
+- ✅ And el usuario ingresa una altura 1.80 (0.001s)
+- ✅ When se calcula el peso ideal corporal (0.001s)
+- ✅ Then el resultado del IBW debe ser 65.0 (0.001s)
+
+#### Test Case 11 (M, 2.00, 87.5)
+- ✅ Given tengo el módulo del cálculo de IBW (0.001s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.001s)
+- ✅ Given el usuario ingresa un sexo M (0.001s)
+- ✅ And el usuario ingresa una altura 2.00 (0.002s)
+- ✅ When se calcula el peso ideal corporal (0.002s)
+- ✅ Then el resultado del IBW debe ser 87.5 (0.001s)
+
+#### Test Case 12 (F, 2.00, 75.0)
+- ✅ Given tengo el módulo del cálculo de IBW (0.005s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.001s)
+- ✅ Given el usuario ingresa un sexo F (0.001s)
+- ✅ And el usuario ingresa una altura 2.00 (0.001s)
+- ✅ When se calcula el peso ideal corporal (0.002s)
+- ✅ Then el resultado del IBW debe ser 75.0 (0.001s)
+
+#### Test Case 13 (M, 2.50, 125.0)
+- ✅ Given tengo el módulo del cálculo de IBW (0.001s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.001s)
+- ✅ Given el usuario ingresa un sexo M (0.002s)
+- ✅ And el usuario ingresa una altura 2.50 (0.001s)
+- ✅ When se calcula el peso ideal corporal (0.002s)
+- ✅ Then el resultado del IBW debe ser 125.0 (0.001s)
+
+#### Test Case 14 (F, 2.50, 100.0)
+- ✅ Given tengo el módulo del cálculo de IBW (0.001s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.001s)
+- ✅ Given el usuario ingresa un sexo F (0.001s)
+- ✅ And el usuario ingresa una altura 2.50 (0.002s)
+- ✅ When se calcula el peso ideal corporal (0.001s)
+- ✅ Then el resultado del IBW debe ser 100.0 (0.001s)
+
+#### Test Case 15 (M, 3.00, 162.5)
+- ✅ Given tengo el módulo del cálculo de IBW (0.001s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.001s)
+- ✅ Given el usuario ingresa un sexo M (0.001s)
+- ✅ And el usuario ingresa una altura 3.00 (0.002s)
+- ✅ When se calcula el peso ideal corporal (0.001s)
+- ✅ Then el resultado del IBW debe ser 162.5 (0.001s)
+
+#### Test Case 16 (F, 3.00, 125.0)
+- ✅ Given tengo el módulo del cálculo de IBW (0.001s)
+- ✅ And se ha elegido la métrica IBW en la calculadora de salud (0.001s)
+- ✅ Given el usuario ingresa un sexo F (0.001s)
+- ✅ And el usuario ingresa una altura 3.00 (0.001s)
+- ✅ When se calcula el peso ideal corporal (0.001s)
+- ✅ Then el resultado del IBW debe ser 125.0 (0.001s)
+
+## Status
+✅ **All tests passed successfully!**
+
+Last execution: 30/03/2026
 
 ## Features
 
