@@ -349,15 +349,11 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 
 <details>
 <summary><b>BMI</b></summary>
-
-Escribir aqui las historias de usuario y el titulo de los escenarios
-- 
-
+ 
 </details>
 
 <details>
 <summary><b>IBW</b></summary>
-
 
 ### Feature: Cálculo del IBW
 
@@ -380,7 +376,6 @@ Escribir aqui las historias de usuario y el titulo de los escenarios
 #### Scenario Outline (IBW)
 
 - Cálculo de IBW con valores de altura y sexo válidos
-
 
 </details>
 
