@@ -353,7 +353,13 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 ### Feature: Cálculo del BMI
 
 - **Archivo .feature:** [python-project-healthcalc/features/calcBMI.feature](python-project-healthcalc/features/calcBMI.feature)
-- **Historia de usuario:** "As usuario de la calculadora, I want calcular el índice de masa corporal, So that conocer mi estado de salud mediante la métrica elegida"
+- **Historia de usuario:** 
+
+    ```
+    As usuario de la calculadora
+    I want calcular el índice de masa corporal
+    So that conocer mi estado de salud mediante la métrica elegida
+    ```
 
 #### Escenarios de Error Handling (BMI)
 
@@ -381,7 +387,13 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 ### Feature: Obtención de la clasificación BMI
 
 - **Archivo .feature:** [python-project-healthcalc/features/clasBMI.feature](python-project-healthcalc/features/clasBMI.feature)
-- **Historia de usuario:** "As usuario de la calculadora, I want obtener mi clasificación BMI, So that conocer mi estado de salud"
+- **Historia de usuario:** 
+    
+    ```
+    As usuario de la calculadora
+    I want obtener mi clasificación BMI
+    So that conocer mi estado de salud
+    ```
 
 #### Escenarios de Error Handling (clasificación BMI)
 
@@ -400,7 +412,13 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 ### Feature: Cálculo del IBW
 
 - **Archivo .feature:** [python-project-healthcalc/features/calcIBW.feature](python-project-healthcalc/features/calcIBW.feature)
-- **Historia de usuario:** "As usuario de la calculadora, I want calcular el peso ideal corporal, So that conocer mi estado de salud mediante la métrica elegida"
+- **Historia de usuario:** 
+    
+    ```
+    As usuario de la calculadora
+    I want calcular el peso ideal corporal
+    So that conocer mi estado de salud mediante la métrica elegida
+    ```
 
 #### Escenarios de Error Handling (IBW)
 
@@ -425,16 +443,16 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 <summary><b>WHR</b></summary>
 
 ### Feature: Cálculo del WHR
-- **Archivo .feature:** [features/calcWHR.feature](features/calcWHR.feature)
+- **Archivo .feature:** [python-project-healthcalc/features/calcWHR.feature](features/calcWHR.feature)
 - **Historia de usuario:**
 
+    ```
     As usuario de la calculadora
-
     I want to calcular el ratio cintura-cadera
+    So that conocer mi estado de salud mediante la métrica elegida
+    ```
 
-    So that conocer mi estado de salud mediante la métrica elegida."
-
-#### Escenarios de Error Handling (calcWHR)
+#### Escenarios de Error Handling (WHR)
 
 1. Cálculo del WHR con perímetro de cintura anumérico
 2. Cálculo de WHR con perímetro de cadera anumérico
@@ -448,29 +466,29 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 10. Cálculo de WHR con perímetro de cadera desbordado
 11. Cálculo de WHR con perímetro de ambos desbordado
 
-#### Escenario de Performance(calcWHR)
+#### Escenario de Performance (WHR)
 
 - Cálculo de WHR con perímetro de ambos igual
 
-#### Scenario Outline(calcWHR)
+#### Scenario Outline (WHR)
 - Cálculo de WHR con valores de cintura y cadera válido
 
 ### Feature: Clasificación WHR
-- **Archivo.feature:** [features/clasWHR.feature](features/clasWHR.feature)
+- **Archivo.feature:** [python-project-healthcalc/features/clasWHR.feature](features/clasWHR.feature)
 - **Historia de usuario:**
 
-	As usuario de la calculadora
+    ```
+    As usuario de la calculadora
+    I want to obtener mi clasificación WHR
+    So that conocer mi morfología y estado de salud
+    ```
 
-	I want to obtener mi clasificación WHR
-
-	So that conocer mi morfología y estado de salud
-
-#### Escenarios de Error Handling 
+#### Escenarios de Error Handling (clasificación WHR)
 1. Clasificación con WHR negativo
 2. Clasificación con WHR exorbitante
 3. Clasificación con sexo inválido
 
-#### Scenario Outline
+#### Scenario Outline (clasificación WHR)
 - Clasificación con sexo y WHR normales
 
 </details>
