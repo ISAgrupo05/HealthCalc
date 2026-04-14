@@ -70,3 +70,58 @@ button:hover {
     color: #dc3545;
     font-weight: bold;
 }
+
+/* Estilos para clasificaciones de BMI */
+.underweight {
+    color: #007bff; /* Azul */
+    font-weight: bold;
+}
+
+.normal-weight {
+    color: #28a745; /* Verde */
+    font-weight: bold;
+}
+
+.overweight {
+    color: #ffc107; /* Amarillo */
+    font-weight: bold;
+}
+
+.obesity {
+    color: #dc3545; /* Rojo */
+    font-weight: bold;
+}
+
+/* Estilos para clasificaciones de WHR */
+.healthy {
+    color: #28a745; /* Verde */
+    font-weight: bold;
+}
+
+.at-risk {
+    color: #ffc107; /* Amarillo */
+    font-weight: bold;
+}
+
+.high-risk {
+    color: #dc3545; /* Rojo */
+    font-weight: bold;
+}
+
+/* Estilos adicionales para mejorar la interfaz */
+.result {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+}
+
+.result h3 {
+    margin-bottom: 10px;
+    color: #495057;
+}
+
+.result p {
+    margin: 5px 0;
+}
