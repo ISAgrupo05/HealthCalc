@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEALTH CALC</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <h1>HEALTH CALC</h1>
+    <h2>Home</h2>
+
+        
+
+
+        <div class="buttons">
+            <form action="{{ url_for('bmi') }}" method="POST" target="_blank">
+                <button title="Body Mass Index: A measure of body fat based on height and weight.">BMI</button>
+            </form>
+            <form action="{{ url_for('ibw') }}" method="POST" target="_blank">
+                <button title="Ideal Body Weight: A calculation of the healthy weight range for a person based on their height.">IBW</button>
+            </form>
+            <form action="{{ url_for('whr') }}" method="POST" target="_blank">
+                <button title="Waist-to-Hip Ratio: A measure of body fat distribution based on the ratio of waist circumference to hip circumference.">WHR</button>
+            </form>   
+        </div>
+        
+
+</body>
+</html>
