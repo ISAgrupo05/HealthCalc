@@ -300,9 +300,15 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 
 ### Dependencias
 - Python 3.13+
-- pytest
-- coverage
-- pytest-cov
+- pytest 9.0.2
+- coverage 7.13.4
+- pytest-cov 7.0.0
+- behave 1.3.3
+- colorama 0.4.6
+- iniconfig 2.3.0
+- pluggy 1.6.0
+- Pygments 2.19.2
+- flask 2.3.2
 
 ### Preparación del entorno
 1. Clonar este repositorio: `git clone https://github.com/IngSoftAvanz/healthcalc.git`
@@ -318,6 +324,7 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 - Ejecutar la aplicación: `python main.py <número>`
 - Ejecutar los tests: `pytest -v`
 - Ejecutar los tests con informe de cobertura: `pytest -v --cov=factorial --cov-report=html tests/`
+- Ejecutar aplicación web: `python mainweb.py` y abrir la URL proporcionada en la terminal
 
 </details>
 
