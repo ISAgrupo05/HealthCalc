@@ -16,6 +16,7 @@ def home():
 @app.route('/bmi', methods=['GET', 'POST'])
 def bmi():
     resultado = None
+    classification = None
 
     if request.method == 'POST':
         try:
@@ -23,12 +24,14 @@ def bmi():
             height = float(request.form['height'])
             health_calc = HealthCalcImpl()
             resultado = health_calc.bmi(weight, height)
+            classification = health_calc.bmi_classification(resultado)
+            
 
         except InvalidHealthDataException:
             resultado= "Invalid input. Please enter numeric values for weight and height." 
         
 #si o sí se envian los datos a la vista
-    return render_template('bmi.html', resultado=resultado)
+    return render_template('bmi.html', resultado=resultado, classification=classification)
 
 @app.route('/ibw', methods=['GET', 'POST'])
 def ibw():
@@ -51,12 +54,13 @@ def whr():
             waist = float(request.form['waist'])
             hip = float(request.form['hip'])
             gender = request.form['gender']
-            health_calc = HealthCalcImpl()      
-            resultado = health_calc.whr_classification(gender, health_calc.whr(waist, hip))
+            health_calc = HealthCalcImpl()  
+            resultado = health_calc.whr(waist, hip)    
+            classification = health_calc.whr_classification(gender, resultado)
         except InvalidHealthDataException:
             resultado = "Invalid input. Please enter valid values for waist, hip, and gender."
 
-    return render_template('whr.html', resultado=resultado)
+    return render_template('whr.html', resultado=resultado, classification=classification)
 
 if __name__ == '__main__':
     app.run(debug=True)
