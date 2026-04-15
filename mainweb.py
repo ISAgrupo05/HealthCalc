@@ -24,7 +24,7 @@ def bmi():
             height = float(request.form['height'])
             health_calc = HealthCalcImpl()
             resultado = health_calc.bmi(weight, height)
-            clasificacion = health_calc.bmi_classification(resultado)
+            classification = health_calc.bmi_classification(resultado)
             
 
         except InvalidHealthDataException:
@@ -60,7 +60,7 @@ def whr():
         except InvalidHealthDataException:
             resultado = "Invalid input. Please enter valid values for waist, hip, and gender."
 
-    return render_template('index.html', resultado=resultado)
+    return render_template('index.html', resultado=resultado, classification=classification)
 
 if __name__ == '__main__':
     app.run(debug=True)
