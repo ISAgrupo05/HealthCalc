@@ -15,13 +15,11 @@
     <form action="{{ url_for('whr') }}" method="POST">
         <div class="form-row"> 
              <label for="waist">Waist (m)</label>
-             <input type="number" id="waist" name="waist" step="0.01" 
-                    value="{{ waist if waist != None else '' }}" required>
+             <input type="number" id="waist" name="waist" step="0.01" required>
         </div>
         <div class="form-row"> 
              <label for="hip">Hip (m)</label>
-             <input type="number" id="hip" name="hip" step="0.01" 
-                    value="{{ hip if hip != None else '' }}" required>
+             <input type="number" id="hip" name="hip" step="0.01" required>
         </div>
         <div class="form-row">
             <label>Sex:</label>
@@ -36,11 +34,23 @@
                 Female
             </label>
         </div>
+        {% if resultado != None%}
+        <div class="result-box">
+            {%if resultado is string and "Error" in resultado %}
+                <p class="error-message">{{ resultado }}</p>
+            {% else %}
 
-        <h2>Results</h2>
+                <h2>Results</h2>
 
-        <p> Your WHR is: {{ whr }}</p>
-        <p> Your WHR Classification is: {{ resultado }}</p>
+                <p> Your WHR is: {{ resultado }}</p>
+                {% if classification != None %}
+                <p> Your WHR Classification is: {{ classification }}</p>
+                {% endif %}
+        
+            {% endif %}
+        </div>
+
+        {% endif %}
         <div class="calculator-section">
             <img src="{{ url_for('static', filename='img/CalculadoraMetricas.png') }}"
                 alt="Health calculator character"

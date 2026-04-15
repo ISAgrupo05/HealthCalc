@@ -49,6 +49,7 @@ def ibw():
 @app.route('/whr', methods=['GET', 'POST'])
 def whr():
     resultado = None
+    classification  = None
     if request.method == 'POST':
         try:
             waist = float(request.form['waist'])
