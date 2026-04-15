@@ -28,7 +28,7 @@ def bmi():
             resultado= "Invalid input. Please enter numeric values for weight and height." 
         
 #si o sí se envian los datos a la vista
-    return render_template('index.html', resultado=resultado)
+    return render_template('bmi.html', resultado=resultado)
 
 @app.route('/ibw', methods=['GET', 'POST'])
 def ibw():
@@ -41,7 +41,7 @@ def ibw():
             resultado = health_calc.lorentz(gender, height)
         except InvalidHealthDataException:
             resultado = "Invalid input. Please enter valid values for height and gender."
-    return render_template('index.html', resultado=resultado)
+    return render_template('ibw.html', resultado=resultado)
 
 @app.route('/whr', methods=['GET', 'POST'])
 def whr():
@@ -56,7 +56,7 @@ def whr():
         except InvalidHealthDataException:
             resultado = "Invalid input. Please enter valid values for waist, hip, and gender."
 
-    return render_template('index.html', resultado=resultado)
+    return render_template('whr.html', resultado=resultado)
 
 if __name__ == '__main__':
     app.run(debug=True)

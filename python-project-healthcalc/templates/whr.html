@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHR</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <h1>WHR</h1>
+    <p>Introduce your values:</p>
+    
+    <form action="{{ url_for('whr') }}" method="POST">
+        <div class="form-row"> 
+             <label for="waist">Waist (m)</label>
+             <input type="number" id="waist" name="waist" step="0.01" 
+                    value="{{ waist if waist != None else '' }}" required>
+        </div>
+        <div class="form-row"> 
+             <label for="hip">Hip (m)</label>
+             <input type="number" id="hip" name="hip" step="0.01" 
+                    value="{{ hip if hip != None else '' }}" required>
+        </div>
+        <div class="form-row">
+            <label>Sex:</label>
+            <label>
+                <input type="radio" name="gender" value="M">
+                Male
+            </label>
+        </div>
+        <div class="form-row">
+            <label>
+                <input type="radio" name="gender" value="F">
+                Female
+            </label>
+        </div>
+
+        <h2>Results</h2>
+
+        <p> Your WHR is: {{ whr }}</p>
+        <p> Your WHR Classification is: {{ resultado }}</p>
+        <div class="calculator-section">
+            <img src="{{ url_for('static', filename='img/CalculadoraMetricas.png') }}"
+                alt="Health calculator character"
+                class="calculator-img">
+            <button type="submit">Calculate</button> 
+        </div>
+        
+
+
+    </form>   
+
+</body>
+</html>
