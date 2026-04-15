@@ -1,13 +1,14 @@
 /* Estilos generales */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7f6;
-    display: flex;
+    background-color: #dcdceb;
+    display: block;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
 }
+
 
 /* El contenedor (Equivalente al JPanel con padding y borde) */
 .container {
@@ -20,9 +21,22 @@ body {
     text-align: center;
 }
 
+/* Títulos centrados */
 h1 {
-    color: #333;
-    margin-bottom: 20px;
+    text-shadow: center;
+    font-size: 48px;
+    color: #6666cc;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+}
+
+h2 {
+    text-align:center;
+    margin-top: 20px;
 }
 
 /* Formulario y componentes atómicos */
@@ -44,20 +58,97 @@ input[type="number"] {
     font-size: 16px;
 }
 
+/* Estilo alinear horizontal botones */
 button {
-    background-color: #28a745;
+    background-color: #6666CC;
     color: white;
-    padding: 10px;
+    width: 200px;
+    height: 80px;
     border: none;
     border-radius: 6px;
-    font-size: 16px;
+    font-size: 22px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 40px;
+}
+
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    position: relative;
+    top: -80px;
+
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #330099;
 }
+
+
+/* Estilo para la imagen principal */
+.calculator-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-top: 40px;
+    margin-left: 300px;
+}
+
+/* Tamaño imagen*/
+.calculator-img {
+    width: 400px;
+    height: auto;
+    display: block;
+   
+}
+
+.calculator-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0px;
+    margin-right: 300px;
+    margin-top: 80px;
+}
+
+/* Bocadillo */
+.speech-bubble {
+    position: relative;
+    border: 2px solid #2f3e6b;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: white;
+    max-width: 300px;
+    margin-top: -200px;
+    font-size: 22px;
+}
+.speech-bubble::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -22px;
+    transform: translateY(-50%);
+    
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
+    border-right: 22px solid #2f3e6b;
+}
+
+.speech-bubble::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    transform: translateY(-50%);
+    
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-right: 20px solid white;
+}
+
 
 /* Área de resultados */
 .result-box {
@@ -125,3 +216,10 @@ button:hover {
 .result p {
     margin: 5px 0;
 }
+
+
+
+
+
+
+
