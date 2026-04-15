@@ -32,9 +32,21 @@
             </label>
         </div>
 
-        <h2>Results</h2>
+        {% if resultado != None %}
+        <div class="result-box">
 
-        <p> Your IBW is: {{ resultado }}</p>
+            {%if resultado is string and "Error" in resultado %}
+                <p class="error-message">{{ resultado }}</p>
+            {% else %}
+                <h2>Results</h2>
+
+                <p> Your IBW is: {{ resultado }}</p>
+                
+                {% endif %}
+        </div>
+        
+        {% endif %}
+
         <div class="calculator-section">
             <img src="{{ url_for('static', filename='img/CalculadoraMetricas.png') }}"
                 alt="Health calculator character"

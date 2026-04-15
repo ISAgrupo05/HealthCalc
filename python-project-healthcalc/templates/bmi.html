@@ -24,17 +24,27 @@
                     value="{{ weight if weight != None else '' }}" required>
         </div>
 
-        <h2>Results</h2>
-
-        <p> Your BMI is: {{ resultado }}</p>
-        <p> Your BMI Classification is: {{ classification }}</p>
-        <div class="calculator-section">
-            <img src="{{ url_for('static', filename='img/CalculadoraMetricas.png') }}"
-                alt="Health calculator character"
-                class="calculator-img">
-            <button type="submit">Calculate</button> 
-        </div>
+        {% if resultado != None and classification != None %}
         
+        <div class="result-box">
+            {%if resultado is string and "Error" in resultado %}
+                <p class="error-message">{{ resultado }}</p>
+            {% else %}
+                <h2>Results</h2>
+
+                <p> Your BMI is: {{ resultado }}</p>
+                <p> Your BMI Classification is: {{ classification }}</p>
+                
+                {% endif %}
+        </div>
+
+        {%endif %}
+        <div class="calculator-section">
+                    <img src="{{ url_for('static', filename='img/CalculadoraMetricas.png') }}"
+                        alt="Health calculator character"
+                        class="calculator-img">
+                    <button type="submit">Calculate</button> 
+                </div>
 
 
     </form>   
