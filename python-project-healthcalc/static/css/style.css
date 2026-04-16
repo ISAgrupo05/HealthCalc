@@ -162,43 +162,6 @@ button:hover {
     font-weight: bold;
 }
 
-/* Estilos para clasificaciones de BMI */
-.underweight {
-    color: #007bff; /* Azul */
-    font-weight: bold;
-}
-
-.normal-weight {
-    color: #28a745; /* Verde */
-    font-weight: bold;
-}
-
-.overweight {
-    color: #ffc107; /* Amarillo */
-    font-weight: bold;
-}
-
-.obesity {
-    color: #dc3545; /* Rojo */
-    font-weight: bold;
-}
-
-/* Estilos para clasificaciones de WHR */
-.healthy {
-    color: #28a745; /* Verde */
-    font-weight: bold;
-}
-
-.at-risk {
-    color: #ffc107; /* Amarillo */
-    font-weight: bold;
-}
-
-.high-risk {
-    color: #dc3545; /* Rojo */
-    font-weight: bold;
-}
-
 /* Estilos adicionales para mejorar la interfaz */
 .result {
     margin-top: 10px;
@@ -221,12 +184,62 @@ button:hover {
 
 /* Tamaño imagen calculate*/
 .calculator-img2 {
-    width: 120px;
+    width: 80px;
     height: auto;
     display: block;
+    margin-top: 50px;
+
    
 }
 
+/* Estilo para las páginas de las métricas */
+.metric-page {
+    text-align: center;
+}
+
+.metric-page label {
+    text-align: left;
+}
 
 
+.sex-group {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 6px;
+}
 
+.sex-title {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: -30px;
+    margin-right: 200px;
+}
+
+.sex-option1 {
+    display: flex;          
+    align-items: center;
+    gap: 6px;
+    margin-left: -15px;
+
+}
+
+.sex-option2 {
+    display: flex;          
+    align-items: center;
+    gap: 6px;
+
+}
+
+.form-row-hip {
+    align-items: center;
+    gap: 6px;
+    margin-left: 16px;
+}
+
+.form-row-weight {
+    align-items: center;
+    gap: 6px;
+    margin-left: -5px;
+
+}
