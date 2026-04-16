@@ -7,7 +7,7 @@
     
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body class = "ibw-page">
+<body class = "metric-page">
 
     <h1>IBW</h1>
     <p>Introduce your values:</p>
@@ -18,19 +18,19 @@
              <input type="number" id="height" name="height" step="0.01" 
                     value="{{ height if height != None else '' }}" required>
         </div>
-        <div class="form-row">
-            <label>Sex:</label>
-            <label>
-                <input type="radio" name="gender" value="M">
+        <div class="form-row sex-group">
+            <label class="sex-title">Sex:</label>
+            <label class="sex-option1">
+                <input type="radio" name="sex" value="M">
                 Male
             </label>
-        </div>
-        <div class="form-row">
-            <label>
-                <input type="radio" name="gender" value="F">
+       
+            <label class="sex-option2">
+                <input type="radio" name="sex" value="F">
                 Female
             </label>
         </div>
+       
 
         {% if resultado != None %}
         <div class="result-box">
@@ -50,7 +50,7 @@
         <div class="calculator-section">
             <img src="{{ url_for('static', filename='img/CalculadoraMetricas.png') }}"
                 alt="Health calculator character"
-                class="calculator-img">
+                class="calculator-img2">
             <button type="submit">Calculate</button> 
         </div>
         
