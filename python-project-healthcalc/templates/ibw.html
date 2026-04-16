@@ -21,12 +21,12 @@
         <div class="form-row sex-group">
             <label class="sex-title">Sex:</label>
             <label class="sex-option1">
-                <input type="radio" name="sex" value="M">
+                <input type="radio" name="gender" value="M">
                 Male
             </label>
        
             <label class="sex-option2">
-                <input type="radio" name="sex" value="F">
+                <input type="radio" name="gender" value="F">
                 Female
             </label>
         </div>
@@ -54,9 +54,17 @@
             <button type="submit">Calculate</button> 
         </div>
         
+    </form>  
+    
+    <div class="exit">  
+            <form action="{{ url_for('home') }}" method="GET">
+                <button class="button-home" title="Click here to go back to the Home page.">
+                    <img src="{{ url_for('static', filename='img/HomeIcon.png') }}" alt="Inicio" width="85">
+                </button>
+            </form>    
+    </div>  
 
-
-    </form>   
+    
 
 </body>
 </html>

@@ -44,10 +44,17 @@
                         alt="Health calculator character"
                         class="calculator-img2">
                     <button type="submit">Calculate</button> 
-                </div>
+        </div>
 
-
-    </form>   
+    </form>  
+    
+    <div class="exit">  
+            <form action="{{ url_for('home') }}" method="GET">
+                <button class="button-home" title="Click here to go back to the Home page.">
+                    <img src="{{ url_for('static', filename='img/HomeIcon.png') }}" alt="Inicio" width="85e">
+                </button>
+            </form>    
+    </div>
 
 </body>
 </html>
