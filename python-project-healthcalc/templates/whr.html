@@ -13,7 +13,7 @@
     <p>Introduce your values:</p>
     
     <form action="{{ url_for('whr') }}" method="POST">
-        <div class="form-row"> 
+        <div class="form-row-waist"> 
              <label for="waist">Waist (m)</label>
              <input type="number" id="waist" name="waist" step="0.01" required>
         </div>
@@ -24,12 +24,12 @@
         <div class="form-row sex-group">
             <label class="sex-title">Sex:</label>
             <label class="sex-option1">
-                <input type="radio" name="gender" value="M">
+                <input type="radio" name="gender" value="M" required>
                 Male
             </label>
        
             <label class="sex-option2">
-                <input type="radio" name="gender" value="F">
+                <input type="radio" name="gender" value="F" required>
                 Female
             </label>
         </div>
@@ -63,7 +63,7 @@
     <div class="exit">  
             <form action="{{ url_for('home') }}" method="GET">
                 <button class="button-home" title="Click here to go back to the Home page.">
-                    <img src="{{ url_for('static', filename='img/HomeIcon.png') }}" alt="Inicio" width="85">
+                    <img src="{{ url_for('static', filename='img/HomeIcon.png') }}" alt="Inicio">
                 </button>
             </form>    
     </div>

@@ -1,7 +1,9 @@
-/* Estilos generales */
+
+
+/* ESTILOS GENERALES */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #dcdceb;
+    background-color: #e2e2fc;
     display: block;
     justify-content: center;
     align-items: center;
@@ -10,7 +12,7 @@ body {
 }
 
 
-/* El contenedor (Equivalente al JPanel con padding y borde) */
+/* CONTENEDOR (con padding y borde) */
 .container {
     background-color: white;
     padding: 30px;
@@ -21,7 +23,7 @@ body {
     text-align: center;
 }
 
-/* Títulos centrados */
+/* TÍTULOS CENTRADOS */
 h1 {
     text-shadow: center;
     font-size: 48px;
@@ -39,7 +41,7 @@ h2 {
     margin-top: 20px;
 }
 
-/* Formulario y componentes atómicos */
+/* FORMULARIO Y COMPONENTES ATÓMICOS */
 form {
     display: flex;
     flex-direction: column;
@@ -47,7 +49,7 @@ form {
 }
 
 label {
-    font-weight: bold;
+    font-weight: normal;
     text-align: left;
 }
 
@@ -58,7 +60,7 @@ input[type="number"] {
     font-size: 16px;
 }
 
-/* Estilo alinear horizontal botones */
+/* ESTILO BOTONES METRICAS */
 button {
     background-color: #6666CC;
     color: white;
@@ -87,7 +89,7 @@ button:hover {
 }
 
 
-/* Estilo para la imagen principal */
+/* ESTILO IMAGEN HOME CALCULADORA */
 .calculator-section {
     display: flex;
     justify-content: center;
@@ -114,7 +116,7 @@ button:hover {
     margin-top: 80px;
 }
 
-/* Bocadillo */
+/* BOCADILLO TEXTO HOME */
 .speech-bubble {
     position: relative;
     border: 2px solid #2f3e6b;
@@ -150,11 +152,17 @@ button:hover {
 }
 
 
-/* Área de resultados */
+/* ÁREA DE RESULTADOS MÉTRICAS */
 .result-box {
     margin-top: 20px;
     padding-top: 20px;
     border-top: 2px solid #eee;
+}
+
+
+.result-box p {
+    text-align: left;
+    margin-left: 400px;
 }
 
 .error {
@@ -162,7 +170,7 @@ button:hover {
     font-weight: bold;
 }
 
-/* Estilos adicionales para mejorar la interfaz */
+/* ESTILOS ADICIONALES PARA MEJORAR LA INTERFAZ */
 .result {
     margin-top: 10px;
     padding: 10px;
@@ -182,19 +190,17 @@ button:hover {
 
 
 
-/* Tamaño imagen calculate*/
-.calculator-img2 {
-    width: 80px;
-    height: auto;
-    display: block;
-    margin-top: 50px;
-
-   
-}
-
-/* Estilo para las páginas de las métricas */
+/* ESTILO PARA LAS PÁGINAS DE LAS MÉTRICAS */
 .metric-page {
     text-align: center;
+    
+}
+
+.metric-page p {
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: left;
+    margin-left: 525px;
 }
 
 .metric-page label {
@@ -207,13 +213,14 @@ button:hover {
     flex-direction: column; 
     align-items: center;
     gap: 6px;
+    margin-right: 70px;
 }
 
 .sex-title {
-    font-weight: bold;
     text-align: center;
-    margin-bottom: -30px;
-    margin-right: 200px;
+    margin-bottom: -25px;
+    margin-right: 190px;
+    font-weight: normal;
 }
 
 .sex-option1 {
@@ -221,6 +228,7 @@ button:hover {
     align-items: center;
     gap: 6px;
     margin-left: -15px;
+    font-weight: normal;
 
 }
 
@@ -228,18 +236,70 @@ button:hover {
     display: flex;          
     align-items: center;
     gap: 6px;
-
+    font-weight: normal;
 }
 
-.form-row-hip {
+.form-row-hip label{
     align-items: center;
-    gap: 6px;
-    margin-left: 16px;
+    font-weight: normal;
+}
+
+.form-row-hip input {
+    margin-left: 15px;
+}
+
+.form-row-waist {
+    align-items: center;
+    font-weight: normal;
 }
 
 .form-row-weight {
     align-items: center;
-    gap: 6px;
-    margin-left: -5px;
+    margin-left: 5px;
+    font-weight: normal;
+}
 
+.form-row-height {
+    align-items: center;
+    margin-left: 8px;
+    font-weight: normal;
+}
+
+/* Tamaño imagen calculate*/
+.calculator-img2 {
+    width: 80px;
+    height: auto;
+    display: block;
+    margin-top: 50px;
+}
+
+/* ESTILO BOTÓN HOME */
+.button-home {
+    width: 80px;
+    height: 80px;
+
+    background-color: #6666CC;
+    border: none;
+    border-radius: 6px;
+
+    padding: 0;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0px;
+    margin-right: 200px;
+}
+
+
+.button-home img {
+    width: 70px;
+    height: 70px;
+}
+
+.exit {
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
