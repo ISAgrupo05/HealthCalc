@@ -499,3 +499,7 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 - Clasificación con sexo y WHR normales
 
 </details>
+
+## Interfaz gráfica de usuario
+
+![Implementación de la aplicacion web](doc/gui/Implementacion.png)
