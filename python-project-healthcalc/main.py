@@ -2,6 +2,17 @@ from healthcalc.health_calc_impl import HealthCalcImpl
 from healthcalc.exceptions import InvalidHealthDataException
 
 def main():
+    calc1 = HealthCalcImpl.getInstance()
+    calc2 = HealthCalcImpl.getInstance()
+
+    print("ID calc1:", id(calc1))
+    print("ID calc2:", id(calc2))
+
+    if calc1 is calc2:
+        print("Singleton works correctly!")
+    else:
+        print("Singleton failed!")
+    
     calc = HealthCalcImpl()
 
     print("Welcome to your Health Calculator!")

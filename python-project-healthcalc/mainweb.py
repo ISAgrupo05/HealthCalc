@@ -22,7 +22,10 @@ def bmi():
         try:
             weight = float(request.form['weight'])
             height = float(request.form['height'])
-            health_calc = HealthCalcImpl()
+            health_calc = HealthCalcImpl.getInstance()
+
+            print("BMI instance ID:", id(health_calc))
+
             resultado = health_calc.bmi(weight, height)
             classification = health_calc.bmi_classification(resultado)
             
@@ -40,7 +43,10 @@ def ibw():
         try:
             height = float(request.form['height'])
             gender = request.form['gender']
-            health_calc = HealthCalcImpl()
+            health_calc = HealthCalcImpl.getInstance()
+
+            print("IBW instance ID:", id(health_calc))
+
             resultado = health_calc.lorentz(gender, height)
         except InvalidHealthDataException:
             resultado = "Invalid input. Please enter valid values for height and gender."
@@ -55,7 +61,10 @@ def whr():
             waist = float(request.form['waist'])
             hip = float(request.form['hip'])
             gender = request.form['gender']
-            health_calc = HealthCalcImpl()  
+            health_calc = HealthCalcImpl.getInstance() 
+
+            print("WHR instance ID:", id(health_calc))
+
             resultado = health_calc.whr(waist, hip)    
             classification = health_calc.whr_classification(gender, resultado)
         except InvalidHealthDataException:
