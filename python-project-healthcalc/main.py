@@ -1,10 +1,13 @@
 from healthcalc.health_calc_impl import HealthCalcImpl
 from healthcalc.exceptions import InvalidHealthDataException
+from healthcalc.health_calc_adapter import HealthCalcAdapter
 
 def main():
+    adapter = HealthCalcAdapter()
     calc1 = HealthCalcImpl.getInstance()
     calc2 = HealthCalcImpl.getInstance()
 
+    print("\n--- TESTING SINGLETON PATTERN ---")
     print("ID calc1:", id(calc1))
     print("ID calc2:", id(calc2))
 
@@ -15,7 +18,29 @@ def main():
     
     calc = HealthCalcImpl()
 
-    print("Welcome to your Health Calculator!")
+    print("\n--- TESTING ADAPTER PATTERN ---")
+
+    hospital_bmi = adapter.calcularIMC(78000, 1.83)
+
+    print("BMI from hospital system:", hospital_bmi)
+
+    classification = adapter.clasificarIMC(hospital_bmi)
+
+    print("BMI Classification:", classification)
+
+    ideal_weight = adapter.pesoIdeal("M", 1.83)
+
+    print("Ideal Body Weight:", ideal_weight)
+
+    whr = adapter.relacionCinturaCadera(0.82, 0.95)
+
+    print("Waist-to-Hip Ratio:", whr)
+
+    whr_classification = adapter.clasificarRCC("M", whr)
+
+    print("WHR Classification:", whr_classification)
+
+    print("\nWelcome to your Health Calculator!")
 
     finish = False
 
