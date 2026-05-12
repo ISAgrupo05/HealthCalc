@@ -1,21 +1,27 @@
 from healthcalc.health_calc_impl import HealthCalcImpl
 from healthcalc.exceptions import InvalidHealthDataException
+from healthcalc.Adapter import Adapter
 
 def main():
-    calc1 = HealthCalcImpl.getInstance()
-    calc2 = HealthCalcImpl.getInstance()
+       
+    calc = HealthCalcImpl.getInstance() #test Singleton
 
-    print("ID calc1:", id(calc1))
-    print("ID calc2:", id(calc2))
+    print("\n--- TESTING ADAPTER PATTERN ---")
 
-    if calc1 is calc2:
-        print("Singleton works correctly!")
-    else:
-        print("Singleton failed!")
-    
-    calc = HealthCalcImpl()
+    calcHAdapter = Adapter(calc)
 
-    print("Welcome to your Health Calculator!")
+    hospital_bmi, classification = calcHAdapter.indiceMasaCorporal(75000, 1.80)
+
+    print("BMI from hospital system:", hospital_bmi)
+
+    print("BMI Classification:", classification)
+
+    ideal_weight = calcHAdapter.pesoCorporalIdeal("M", 1.80)
+
+    print("Ideal Body Weight:", ideal_weight)
+
+
+    print("\nWelcome to your Health Calculator!")
 
     finish = False
 
