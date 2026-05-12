@@ -1,10 +1,88 @@
 from healthcalc.health_calc_impl import HealthCalcImpl
 from healthcalc.exceptions import InvalidHealthDataException
+from healthcalc.Adapter import Adapter
+from healthcalc.Proxy import HealthCalcProxy
+from healthcalc.HealthStatsImpl import HealthStatsImpl
 
 def main():
-    calc = HealthCalcImpl()
+       
+    calc = HealthCalcImpl.getInstance() #test Singleton
 
-    print("Welcome to your Health Calculator!")
+    print("\n--- TESTING ADAPTER PATTERN ---")
+
+    calcHAdapter = Adapter(calc)
+
+    hospital_bmi, classification = calcHAdapter.indiceMasaCorporal(75000, 1.80)
+
+    print("BMI from hospital system:", hospital_bmi)
+
+    print("BMI Classification:", classification)
+
+    ideal_weight = calcHAdapter.pesoCorporalIdeal("M", 1.80)
+
+    print("Ideal Body Weight:", ideal_weight)
+
+    print("\n--- TESTING PROXY PATTERN: STATS ---")
+    
+    stats = HealthStatsImpl()
+
+    calcHProxy = HealthCalcProxy(
+        calcHAdapter,
+        stats
+    )
+    
+    result = calcHProxy.indiceMasaCorporal(
+        78000,
+        1.83
+    )
+
+    result2 = calcHProxy.indiceMasaCorporal(
+        90000,
+        1.75
+    )
+
+
+    calcHProxy.pesoCorporalIdeal(
+        "M",
+        1.83
+    )
+
+    calcHProxy.pesoCorporalIdeal(
+        "F",
+        1.65
+    )
+
+    print(
+        "Average height:",
+        stats.alturaMedia()
+    )
+
+    print(
+        "Average weight:",
+        stats.pesoMedio()
+    )
+
+    print(
+        "Average BMI:",
+        stats.imcMedio()
+    )
+
+    print(
+        "Men:",
+        stats.numSexoH()
+    )
+
+    print(
+        "Women:",
+        stats.numSexoM()
+    )
+    
+    print(
+        "Total patients:",
+        stats.numTotalPacientes()
+    )
+
+    print("\nWelcome to your Health Calculator!")
 
     finish = False
 
