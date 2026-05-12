@@ -94,6 +94,13 @@ def main():
                 print("Value must be a number, try again.")
 
     
+    Rstats = HealthStatsImpl()
+
+    RcalcHProxy = HealthCalcProxy(
+        calcHAdapter,
+        Rstats
+    )
+
     while not finish:
         answer = input("Do you want to know your Body Mass Index? Y/N \n")
 
@@ -107,8 +114,8 @@ def main():
                     weight = ask_float("Input your weight (kg): \n")
                     height = ask_float("Input your height (m): \n")
 
-                    bmi = calc.bmi(weight, height)
-                    classification = calc.bmi_classification(bmi)
+                    bmi, classification = RcalcHProxy.indiceMasaCorporal(weight*1000, height)
+                    # classification = calc.bmi_classification(bmi)
                     valid = True
                 except InvalidHealthDataException as e:
                     print(e)
@@ -132,7 +139,7 @@ def main():
                     while sex.upper() != "M" and sex.upper() != "F":
                         sex = input("Your sex must be either 'M' (male) or 'F' (female), try again: \n")
 
-                    ibw = calc.lorentz(sex.upper(), height)
+                    ibw = RcalcHProxy.pesoCorporalIdeal(sex.upper(), height)
                     valid2 = True
                 except InvalidHealthDataException:
                     print("Invalid health data, try again.")
@@ -171,6 +178,42 @@ def main():
         
         if answer4.upper() == "Y":
             finish = True
+    
+    print("\n--- REAL STATS ---")
+
+    print(
+        "Average height:",
+        Rstats.alturaMedia(),
+        "m"
+    )
+
+    print(
+        "Average weight:",
+        Rstats.pesoMedio()/1000,
+        "kg"
+    )
+
+    print(
+        "Average BMI:",
+        Rstats.imcMedio()
+    )
+
+    print(
+        "Men:",
+        Rstats.numSexoH()
+    )
+
+    print(
+        "Women:",
+        Rstats.numSexoM()
+    )
+    
+    print(
+        "Total patients:",
+        Rstats.numTotalPacientes()
+    )
+        
+
 
 
 if __name__ == "__main__":
