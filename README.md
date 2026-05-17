@@ -504,24 +504,20 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 
 ![Implementación de la aplicacion web](doc/gui/Implementacion.png)
 
-## Práctica 6: Patrones de diseño  
+## Práctica 6: Patrones de diseño
 
-<details>
-<summary><b>Apartado 2. Patrón Singleton</b></summary>
+### Apartado 2. Patrón Singleton
+
 ![Patrón Singleton](design_patterns/Patron_Singular.png)
-</details>
 
-<details>
-<summary><b>Apartado 3a. Patrón Adapter</b></summary>
+### Apartado 3a. Patrón Adapter
+
 ![Patrón Adapter](design_patterns/Patron_Adapter.png)
-</details>
 
-<details>
-<summary><b>Apartado 3b. Patrón Proxy</b></summary>
+### Apartado 3b. Patrón Proxy
+
 ![Patrón Proxy](design_patterns/Patron_Proxy.png)
-</details>
 
-<details>
-<summary><b>Apartado 3c. Patrón Decorator</b></summary>
+### Apartado 3c. Patrón Decorator
+
 ![Patrón Decorator](design_patterns/Patron_Decorator.png)
-</details>
