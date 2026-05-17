@@ -506,4 +506,14 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 
 ## Práctica 6: Patrones de diseño  
 
+<summary><b>Apartado 2. Patrón Singleton</b></summary>
+![Patrón Singleton](design_patterns/Patron_Singular.png)
 
+<summary><b>Apartado 3a. Patrón Adapter</b></summary>
+![Patrón Singleton](design_patterns/Patron_Adapter.png)
+
+<summary><b>Apartado 3b. Patrón Proxy</b></summary>
+![Patrón Singleton](design_patterns/Patron_Proxy.png)
+
+<summary><b>Apartado 3c. Patrón Decorator</b></summary>
+![Patrón Singleton](design_patterns/Patron_Decorator.png)
