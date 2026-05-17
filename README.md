@@ -503,3 +503,7 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 ## Interfaz gráfica de usuario
 
 ![Implementación de la aplicacion web](doc/gui/Implementacion.png)
+
+## Práctica 6: Patrones de diseño  
+
+
