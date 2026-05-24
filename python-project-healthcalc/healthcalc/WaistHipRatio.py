@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from .person import Person
 
 
 class WaistHipRatio(ABC):
@@ -11,7 +12,7 @@ class WaistHipRatio(ABC):
     """
 
     @abstractmethod
-    def m(self, person) -> float:
+    def m(self, person: Person) -> float:
         """Calcula la métrica a partir de un objeto `person`.
 
         Parámetro `person` es deliberadamente genérico para permitir distintas
