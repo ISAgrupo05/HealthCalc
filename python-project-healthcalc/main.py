@@ -3,6 +3,10 @@ from healthcalc.exceptions import InvalidHealthDataException
 from healthcalc.Adapter import Adapter
 from healthcalc.Proxy import HealthCalcProxy
 from healthcalc.HealthStatsImpl import HealthStatsImpl
+from healthcalc.DecoratorEU import DecoratorEU
+from healthcalc.DecoratorUSA import DecoratorUSA
+from healthcalc.DecoratorEnglish import DecoratorEnglish
+from healthcalc.DecoratorEspanol import DecoratorEspanol
 
 def main():
        
@@ -26,61 +30,47 @@ def main():
     
     stats = HealthStatsImpl()
 
-    calcHProxy = HealthCalcProxy(
-        calcHAdapter,
-        stats
-    )
+    calcHProxy = HealthCalcProxy(calcHAdapter,stats)
     
-    result = calcHProxy.indiceMasaCorporal(
-        78000,
-        1.83
-    )
+    result = calcHProxy.indiceMasaCorporal(78000,1.83)
 
-    result2 = calcHProxy.indiceMasaCorporal(
-        90000,
-        1.75
-    )
+    result2 = calcHProxy.indiceMasaCorporal(90000,1.75)
 
+    calcHProxy.pesoCorporalIdeal("M",1.83)
 
-    calcHProxy.pesoCorporalIdeal(
-        "M",
-        1.83
-    )
+    calcHProxy.pesoCorporalIdeal("F",1.65)
 
-    calcHProxy.pesoCorporalIdeal(
-        "F",
-        1.65
-    )
+    print("Average height:",stats.alturaMedia())
 
-    print(
-        "Average height:",
-        stats.alturaMedia()
-    )
+    print("Average weight:", stats.pesoMedio())
 
-    print(
-        "Average weight:",
-        stats.pesoMedio()
-    )
+    print("Average BMI:",stats.imcMedio())
 
-    print(
-        "Average BMI:",
-        stats.imcMedio()
-    )
+    print("Men:",stats.numSexoH())
 
-    print(
-        "Men:",
-        stats.numSexoH()
-    )
-
-    print(
-        "Women:",
-        stats.numSexoM()
-    )
+    print("Women:", stats.numSexoM())
     
-    print(
-        "Total patients:",
-        stats.numTotalPacientes()
-    )
+    print("Total patients:",stats.numTotalPacientes())
+
+    print("\n--- TESTING DECORATOR PATTERN ---")
+
+    # EU metric + English classification
+    eu_decorator = DecoratorEnglish(DecoratorEU(calcHAdapter))
+    eu_bmi, eu_class = eu_decorator.indiceMasaCorporal(75.0, 1.80)
+    eu_ibw = eu_decorator.pesoCorporalIdeal("M", 1.80)
+    print("EU / English - BMI:", eu_bmi)
+    print("EU / English - Classification:", eu_class)
+    print("EU / English - Ideal Body Weight:", eu_ibw, "kg")
+
+    # USA imperial + Español classification
+    usa_decorator = DecoratorEspanol(DecoratorUSA(calcHAdapter))
+    usa_bmi, usa_class = usa_decorator.indiceMasaCorporal(165.0, 66.93)  # 165 lbs, 66.93 inches (~1.70 m)
+    usa_ibw = usa_decorator.pesoCorporalIdeal('F', 66.93)
+    print("USA / Español - BMI:", usa_bmi)
+    print("USA / Español - Clasificación:", usa_class)
+    print("USA / Español - Peso Corporal Ideal:", usa_ibw, "lbs")
+
+
 
     print("\nWelcome to your Health Calculator!")
 
