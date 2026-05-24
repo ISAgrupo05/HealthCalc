@@ -1,12 +1,12 @@
 from abc import ABC, abstractmethod
 from healthcalc.BMICategory import BMICategory
-
+from .person import Person
 
 class BasalMetabolicIndex(ABC):
     """Interface for the calculator of basal metabolic index."""
 
     @abstractmethod
-    def basalMetabolicIndex(self, person) -> float:
+    def basalMetabolicIndex(self, Person: person) -> float:
         """Calculate the Basal Metabolic Index (BMI).
 
         :param person: Person object with health data
@@ -16,7 +16,7 @@ class BasalMetabolicIndex(ABC):
         pass
 
     @abstractmethod
-    def category(self, person) -> BMICategory:
+    def category(self, Person: person) -> BMICategory:
         """Calculate the BMI category classification of a person.
 
         :param person: Person object with health data
