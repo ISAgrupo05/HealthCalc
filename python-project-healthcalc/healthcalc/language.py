@@ -1,8 +1,9 @@
 from enum import Enum
 
-class Gender(Enum):
-    MALE = "M"
-    FEMALE = "F"
+class Language(Enum):
+
+    ENGLISH = "EN"
+    SPANISH = "ES"
 
     def __str__(self) -> str:
         return self.value

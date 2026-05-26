@@ -1,5 +1,8 @@
 from .health_calc import HealthCalc
 from .exceptions import InvalidHealthDataException
+from .gender import Gender
+from .BMICategory import BMICategory
+from .WHRCategory import WHRCategory
 
 class HealthCalcImpl(HealthCalc):
 
@@ -13,20 +16,40 @@ class HealthCalcImpl(HealthCalc):
 
         return HealthCalcImpl._instance
 
-    def bmi_classification(self, bmi: float) -> str:
+    def bmi_classification(self, bmi: float) -> BMICategory:
+
         if bmi < 0:
-            raise InvalidHealthDataException("BMI cannot be negative.")
+            raise InvalidHealthDataException(
+                "BMI cannot be negative."
+            )
+
         if bmi > 150:
-            raise InvalidHealthDataException("BMI must be within a possible biological range [0-150].")
-        
-        result = "Obesity"
-        if bmi < 18.5:
-            result = "Underweight"
+            raise InvalidHealthDataException(
+                "BMI must be within a possible biological range [0-150]."
+            )
+
+        if bmi < 16:
+            return BMICategory.SEVERE_THINNESS
+
+        elif bmi < 17:
+            return BMICategory.MODERATE_THINNESS
+
+        elif bmi < 18.5:
+            return BMICategory.MILD_THINNESS
+
         elif bmi < 25:
-            result = "Normal weight"
+            return BMICategory.NORMAL
+
         elif bmi < 30:
-            result = "Overweight"
-        return result
+            return BMICategory.OVERWEIGHT
+
+        elif bmi < 35:
+            return BMICategory.OBESE_CLASS_I
+
+        elif bmi < 40:
+            return BMICategory.OBESE_CLASS_II
+
+        return BMICategory.OBESE_CLASS_III
 
     def bmi(self, weight: float, height: float) -> float:
         if weight <= 0:
@@ -41,7 +64,7 @@ class HealthCalcImpl(HealthCalc):
         return weight / (height ** 2)
 
 
-    def lorentz(self, sex: str, height: float) -> float:
+    def lorentz(self, gender: Gender, height: float) -> float:
         try:
             height_value = float(height)
         except (ValueError, TypeError):
@@ -51,13 +74,12 @@ class HealthCalcImpl(HealthCalc):
             raise InvalidHealthDataException("Height must be positive.")
         if height_value < 1.00 or height_value > 3.00:
             raise InvalidHealthDataException("Height must be within a possible biological range [1.00-3.00] m.")
-        if sex.upper() != "M" and sex.upper() != "F":
-            raise InvalidHealthDataException("Sex must be either 'M' (Male) or 'F' (Female).")
-
-        if sex.upper() == "M":
+        
+        if gender == Gender.MALE:
             return (height_value*100 - 100) - ((height_value*100 - 150)/4)
         else:
             return (height_value*100 - 100) - ((height_value*100 - 150)/2)
+
         
     def whr(self, waist:float, hip:float) -> float:
         try:
@@ -77,21 +99,21 @@ class HealthCalcImpl(HealthCalc):
 
         return waist_value / hip_value
     
-    def whr_classification(self, sex: str, whr: float) -> str:
+    def whr_classification(self, gender: Gender, whr: float) -> WHRCategory:
         if whr < 0:
             raise InvalidHealthDataException("WHR cannot be negative.")
         if whr > 5:
             raise InvalidHealthDataException("WHR must be within a possible biological range [0-5].")
-        if sex.upper() != "M" and sex.upper() != "F":
-            raise InvalidHealthDataException("Sex must be either 'M' (Male) or 'F' (Female).")
+        if gender is None:
+            raise InvalidHealthDataException("Gender must be either 'M' (Male) or 'F' (Female).")
 
-        result = "Apple"
-        if sex.upper() == "M":
+        result = WHRCategory.APPLE
+        if gender == Gender.MALE:
             if whr <= 0.90:
-                result = "Pear"
+                result = WHRCategory.PEAR
         else:
             if whr <= 0.85:
-                result = "Pear"
+                result = WHRCategory.PEAR
             
         return result
 

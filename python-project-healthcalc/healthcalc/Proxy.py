@@ -13,10 +13,7 @@ class HealthCalcProxy(HealthHospital):
         imc = result[0]
         metric_data = health_data.normalize()
         self.stats.addPaciente(
-            peso=metric_data.weight,
-            altura=metric_data.height,
-            imc=imc,
-            sexo=metric_data.sex
+            metric_data, imc
         )
         return result
 
@@ -24,7 +21,6 @@ class HealthCalcProxy(HealthHospital):
         result = self.healthH.pesoCorporalIdeal(health_data)
         metric_data = health_data.normalize()
         self.stats.addPaciente(
-            altura=metric_data.height,
-            sexo=metric_data.sex
+            metric_data, None
         )
         return result

@@ -1,5 +1,5 @@
 from healthcalc.HealthStats import HealthStats
-
+from healthcalc.gender import Gender
 
 class HealthStatsImpl(HealthStats):
 
@@ -12,21 +12,31 @@ class HealthStatsImpl(HealthStats):
         self.hombres = 0
         self.mujeres = 0
 
-    def addPaciente(self, peso=None, altura=None, imc=None, sexo=None):
+    def _add_if_not_none(self, lst, value):
+        if value is not None:
+            lst.append(value)
 
-        if peso is not None:
-            self.pesos.append(peso)
+    def addPaciente(self, person, imc=None):
 
-        if altura is not None:
-            self.alturas.append(altura)
+        self._add_if_not_none(
+            self.pesos,
+            person.weight
+        )
 
-        if imc is not None:
-            self.imcs.append(imc)
+        self._add_if_not_none(
+            self.alturas,
+            person.height
+        )
 
-        if sexo == "M":
+        self._add_if_not_none(
+            self.imcs,
+            imc
+        )
+
+        if person.gender == Gender.MALE:
             self.hombres += 1
 
-        elif sexo == "F":
+        elif person.gender == Gender.FEMALE:
             self.mujeres += 1
 
     def alturaMedia(self) -> float:

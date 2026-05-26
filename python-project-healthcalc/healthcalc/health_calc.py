@@ -1,16 +1,19 @@
 from abc import ABC, abstractmethod
 from healthcalc import InvalidHealthDataException
+from .gender import Gender
+from .BMICategory import BMICategory
+from .WHRCategory import WHRCategory
 
 
 class HealthCalc(ABC):
     """Interface for the calculator of health parameters."""
 
     @abstractmethod
-    def bmi_classification(self, bmi: float) -> str:
+    def bmi_classification(self, bmi: float) -> BMICategory:
         """Calculate the BMI classification of a person.
 
         :param bmi: Body Mass Index (kg/m2)
-        :return: String classification
+        :return: BMICategory classification
         :raises InvalidHealthDataException: If data is out of range
         """
         pass
@@ -27,10 +30,10 @@ class HealthCalc(ABC):
         pass
 
     @abstractmethod
-    def lorentz(self, sex: str, height: float) -> float:
+    def lorentz(self, gender: Gender, height: float) -> float:
         """Calculate the Ideal Body Weight (IBW).
         
-        :param sex: String Sex (M/F)
+        :param gender: Gender gender (M/F)
         :param height: Height (m)
         :return: Lorentz value (kg)
         :raises InvalidHealthDataException: If data is out of range
@@ -49,12 +52,12 @@ class HealthCalc(ABC):
         pass
 
     @abstractmethod
-    def whr_classification(self, sex: str, whr: float) -> str:
+    def whr_classification(self, gender: Gender, whr: float) -> WHRCategory:
         """Calculate the WHR classification of a person.
         
-        :param sex: String Sex (M/F)
+        :param gender: Gender gender (M/F)
         :param whr: WHR value
-        :return: String Classification
+        :return: WHRCategory classification
         :raises InvalidHealthDataException: If data is out of range
         """
         pass

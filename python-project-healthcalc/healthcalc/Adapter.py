@@ -15,5 +15,5 @@ class Adapter(HealthHospital):
 
     def pesoCorporalIdeal(self, health_data: HealthData) -> float:
         metric_data = health_data.normalize()
-        return self.calc.lorentz(metric_data.sex, metric_data.height)
+        return self.calc.lorentz(metric_data.gender, metric_data.height)
     
