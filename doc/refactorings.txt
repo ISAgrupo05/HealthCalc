@@ -1,0 +1,54 @@
+1. Bad smell: Primitive Obsession
+
+Refactoring aplicado:
+
+* Replace Type Code with Enum
+
+Tipo:
+
+* Attribute Refactoring
+
+Descripción:
+Se sustituyeron valores primitivos representados mediante strings ("M", "F", "Pear", "Apple", etc.) por enums tipados como Gender, BMICategory y WHRCategory. Esto mejora la legibilidad y reduce errores relacionados con comparaciones de cadenas.
+
+Cambios manuales:
+
+* Creación de 3 enums
+* Modificación de imports relacionados
+
+2. Bad smell: Large Class / Divergent Change
+
+Refactoring aplicado:
+
+* Extract Interface
+
+Tipo:
+
+* Class Refactoring
+
+Descripción:
+Se separaron las distintas responsabilidades de cálculo creando interfaces independientes como IdealBodyWeight y WaistHipRatio. Esto permite desacoplar funcionalidades y adaptar el diseño al nuevo esquema UML proporcionado en la práctica.
+
+Cambios manuales:
+
+* Creación de 2 interfaces nuevas
+* Reorganización inicial de responsabilidades
+
+3. Bad smell: Data Clumps / Long Parameter List
+
+Refactoring aplicado:
+
+* Extract Class
+* Introduce Parameter Object
+
+Tipo:
+
+* Class Refactoring / Method Refactoring
+
+Descripción:
+Se creó la clase Person para encapsular los datos relacionados con una persona (peso, altura, sexo, cintura, cadera y edad). Este cambio prepara el sistema para sustituir listas largas de parámetros por objetos completos.
+
+Cambios manuales:
+
+* Creación de 1 clase nueva
+* Definición de atributos y validaciones básicas
