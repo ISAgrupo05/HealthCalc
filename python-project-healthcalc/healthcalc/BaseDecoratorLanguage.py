@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from .health_hospital import HealthHospital
+from .HealthData import HealthData
 
 
 class BaseDecoratorLanguage(HealthHospital, ABC):
@@ -12,14 +13,14 @@ class BaseDecoratorLanguage(HealthHospital, ABC):
         self.healthcalc = healthcalc
 
     @abstractmethod
-    def indiceMasaCorporal(self, peso: float, altura: float) -> tuple:
+    def indiceMasaCorporal(self, health_data: HealthData) -> tuple:
         """
         Calcula el índice de masa corporal con clasificación en el idioma especificado.
         """
         pass
 
     @abstractmethod
-    def pesoCorporalIdeal(self, sexo: str, altura: float) -> float:
+    def pesoCorporalIdeal(self, health_data: HealthData) -> float:
         """
         Calcula el peso corporal ideal.
         """

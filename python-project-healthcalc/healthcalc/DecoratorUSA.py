@@ -1,4 +1,5 @@
 from .BaseDecoratorRegion import BaseDecoratorRegion
+from .HealthData import HealthData
 from .health_hospital import HealthHospital
 
 
@@ -13,31 +14,21 @@ class DecoratorUSA(BaseDecoratorRegion):
         super().__init__(healthcalc)
         self.region = "USA"
 
-    def indiceMasaCorporal(self, peso: float, altura: float) -> tuple:
+    def indiceMasaCorporal(self, health_data: HealthData) -> tuple:
         """
         Calcula BMI. En USA, peso está en libras (lbs) y altura en pulgadas (inches).
         Convierte a kg y m para el cálculo interno.
         """
-        peso_kg = self._convertir_peso_entrada(peso)
-        altura_m = self._convertir_altura_entrada(altura)
-        
-        result = self.healthcalc.indiceMasaCorporal(peso_kg, altura_m)
-        
-        bmi = result[0]
-        clasificacion = result[1]
-        
-        return bmi, clasificacion
+        metric_data = health_data.normalize()
+        return self.healthcalc.indiceMasaCorporal(metric_data)
 
-    def pesoCorporalIdeal(self, sexo: str, altura: float) -> float:
+    def pesoCorporalIdeal(self, health_data: HealthData) -> float:
         """
         Calcula peso corporal ideal. En USA, altura en pulgadas, resultado en libras.
         """
-        altura_m = self._convertir_altura_entrada(altura)
-        
-        peso_ideal_kg = self.healthcalc.pesoCorporalIdeal(sexo, altura_m)
-        peso_ideal_lbs = self._convertir_peso_salida(peso_ideal_kg)
-        
-        return peso_ideal_lbs
+        metric_data = health_data.normalize()
+        peso_ideal_kg = self.healthcalc.pesoCorporalIdeal(metric_data)
+        return HealthData.kg_to_lbs(peso_ideal_kg)
 
     def _convertir_peso_entrada(self, peso: float) -> float:
         """
