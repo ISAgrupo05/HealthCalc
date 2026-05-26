@@ -52,3 +52,22 @@ Cambios manuales:
 
 * Creación de 1 clase nueva
 * Definición de atributos y validaciones básicas
+
+8. Bad smell: Shotgun Surgery
+
+Refactoring aplicado:
+* Introduce Parameter Object
+* Move Method
+
+Tipo:
+* Method Refactoring
+
+Descripción:
+* Crear HealthData.py como objeto parámetro para agrupar peso, altura, sexo, cintura, cadera y sistema de unidades.
+* Refactorizar clases Adapter,Proxy, Decorators y may para que utilicen ese objeto.
+
+Cambios:
+* 1 archivo nuevo: HealthData.py
+* 11 archivos refactorizados: (__init__.py, health_hospital.py, BaseDecoratorRegion.py, 
+BaseDecoratorLanguage.py, Adapter.py, Proxy.py, DecoratorEU.py, DecoratorUSA.py, 
+DecoratorEnglish.py, DecoratorEspanol.py, main.py)

@@ -1,11 +1,12 @@
 from abc import ABC, abstractmethod
+from .HealthData import HealthData
 
 class HealthHospital(ABC):
 
     @abstractmethod
-    def indiceMasaCorporal(self, peso: float, altura: float) -> float:
+    def indiceMasaCorporal(self, health_data: HealthData) -> tuple:
         pass
 
     @abstractmethod
-    def pesoCorporalIdeal(self, sexo: str, altura: float) -> float:
+    def pesoCorporalIdeal(self, health_data: HealthData) -> float:
         pass

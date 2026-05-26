@@ -1,5 +1,6 @@
 from healthcalc.health_calc_impl import HealthCalcImpl
 from healthcalc.exceptions import InvalidHealthDataException
+from healthcalc.HealthData import HealthData
 from healthcalc.Adapter import Adapter
 from healthcalc.Proxy import HealthCalcProxy
 from healthcalc.HealthStatsImpl import HealthStatsImpl
@@ -16,13 +17,17 @@ def main():
 
     calcHAdapter = Adapter(calc)
 
-    hospital_bmi, classification = calcHAdapter.indiceMasaCorporal(75000, 1.80)
+    hospital_bmi, classification = calcHAdapter.indiceMasaCorporal(
+        HealthData(weight=75000, height=1.80, unit_system="GRAMS")
+    )
 
     print("BMI from hospital system:", hospital_bmi)
 
     print("BMI Classification:", classification)
 
-    ideal_weight = calcHAdapter.pesoCorporalIdeal("M", 1.80)
+    ideal_weight = calcHAdapter.pesoCorporalIdeal(
+        HealthData(sex="M", height=1.80, unit_system="GRAMS")
+    )
 
     print("Ideal Body Weight:", ideal_weight)
 
@@ -30,15 +35,23 @@ def main():
     
     stats = HealthStatsImpl()
 
-    calcHProxy = HealthCalcProxy(calcHAdapter,stats)
+    calcHProxy = HealthCalcProxy(calcHAdapter, stats)
     
-    result = calcHProxy.indiceMasaCorporal(78000,1.83)
+    result = calcHProxy.indiceMasaCorporal(
+        HealthData(weight=78000, height=1.83, unit_system="GRAMS")
+    )
 
-    result2 = calcHProxy.indiceMasaCorporal(90000,1.75)
+    result2 = calcHProxy.indiceMasaCorporal(
+        HealthData(weight=90000, height=1.75, unit_system="GRAMS")
+    )
 
-    calcHProxy.pesoCorporalIdeal("M",1.83)
+    calcHProxy.pesoCorporalIdeal(
+        HealthData(sex="M", height=1.83, unit_system="GRAMS")
+    )
 
-    calcHProxy.pesoCorporalIdeal("F",1.65)
+    calcHProxy.pesoCorporalIdeal(
+        HealthData(sex="F", height=1.65, unit_system="GRAMS")
+    )
 
     print("Average height:",stats.alturaMedia())
 
@@ -56,16 +69,24 @@ def main():
 
     # EU metric + English classification
     eu_decorator = DecoratorEnglish(DecoratorEU(calcHAdapter))
-    eu_bmi, eu_class = eu_decorator.indiceMasaCorporal(75.0, 1.80)
-    eu_ibw = eu_decorator.pesoCorporalIdeal("M", 1.80)
+    eu_bmi, eu_class = eu_decorator.indiceMasaCorporal(
+        HealthData(weight=75.0, height=1.80, unit_system="KG")
+    )
+    eu_ibw = eu_decorator.pesoCorporalIdeal(
+        HealthData(sex="M", height=1.80, unit_system="KG")
+    )
     print("EU / English - BMI:", eu_bmi)
     print("EU / English - Classification:", eu_class)
     print("EU / English - Ideal Body Weight:", eu_ibw, "kg")
 
     # USA imperial + Español classification
     usa_decorator = DecoratorEspanol(DecoratorUSA(calcHAdapter))
-    usa_bmi, usa_class = usa_decorator.indiceMasaCorporal(165.0, 66.93)  # 165 lbs, 66.93 inches (~1.70 m)
-    usa_ibw = usa_decorator.pesoCorporalIdeal('F', 66.93)
+    usa_bmi, usa_class = usa_decorator.indiceMasaCorporal(
+        HealthData(weight=165.0, height=66.93, unit_system="LBS")
+    )
+    usa_ibw = usa_decorator.pesoCorporalIdeal(
+        HealthData(sex='F', height=66.93, unit_system="INCHES")
+    )
     print("USA / Español - BMI:", usa_bmi)
     print("USA / Español - Clasificación:", usa_class)
     print("USA / Español - Peso Corporal Ideal:", usa_ibw, "lbs")
@@ -104,8 +125,9 @@ def main():
                     weight = ask_float("Input your weight (kg): \n")
                     height = ask_float("Input your height (m): \n")
 
-                    bmi, classification = RcalcHProxy.indiceMasaCorporal(weight*1000, height)
-                    # classification = calc.bmi_classification(bmi)
+                    bmi, classification = RcalcHProxy.indiceMasaCorporal(
+                        HealthData(weight=weight * 1000, height=height, unit_system="GRAMS")
+                    )
                     valid = True
                 except InvalidHealthDataException as e:
                     print(e)
@@ -129,7 +151,9 @@ def main():
                     while sex.upper() != "M" and sex.upper() != "F":
                         sex = input("Your sex must be either 'M' (male) or 'F' (female), try again: \n")
 
-                    ibw = RcalcHProxy.pesoCorporalIdeal(sex.upper(), height)
+                    ibw = RcalcHProxy.pesoCorporalIdeal(
+                        HealthData(sex=sex.upper(), height=height, unit_system="GRAMS")
+                    )
                     valid2 = True
                 except InvalidHealthDataException:
                     print("Invalid health data, try again.")
