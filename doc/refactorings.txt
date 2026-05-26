@@ -9,12 +9,16 @@ Tipo:
 * Attribute Refactoring
 
 Descripción:
-Se sustituyeron valores primitivos representados mediante strings ("M", "F", "Pear", "Apple", etc.) por enums tipados como Gender, BMICategory y WHRCategory. Esto mejora la legibilidad y reduce errores relacionados con comparaciones de cadenas.
+Se sustituyeron valores primitivos representados mediante strings ("M", "F", "Pear", "Apple", etc.) por enums tipados como Gender, 
+BMICategory, WHRCategory, Language y UnitSystem. Esto mejora la legibilidad, reduce errores relacionados con comparaciones de 
+cadenas y permite un mayor control de tipos dentro del dominio de la aplicación.
+
 
 Cambios manuales:
 
-* Creación de 3 enums
-* Modificación de imports relacionados
+* Creación de 5 enums
+* Modificación de imports y comparaciones relacionadas
+* Adaptación de tests y métodos afectados
 
 2. Bad smell: Large Class / Divergent Change
 
@@ -27,7 +31,8 @@ Tipo:
 * Class Refactoring
 
 Descripción:
-Se separaron las distintas responsabilidades de cálculo creando interfaces independientes como IdealBodyWeight y WaistHipRatio. Esto permite desacoplar funcionalidades y adaptar el diseño al nuevo esquema UML proporcionado en la práctica.
+Se separaron las distintas responsabilidades de cálculo creando interfaces independientes como IdealBodyWeight y WaistHipRatio. 
+Esto permite desacoplar funcionalidades y adaptar el diseño al nuevo esquema UML proporcionado en la práctica.
 
 Cambios manuales:
 
@@ -46,12 +51,15 @@ Tipo:
 * Class Refactoring / Method Refactoring
 
 Descripción:
-Se creó la clase Person para encapsular los datos relacionados con una persona (peso, altura, sexo, cintura, cadera y edad). Este cambio prepara el sistema para sustituir listas largas de parámetros por objetos completos.
+Se crearon clases como Person y HealthData para encapsular los datos relacionados con una persona (peso, altura, sexo, cintura, 
+cadera, edad y sistema de unidades). Esto permitió reducir listas largas de parámetros y agrupar información que normalmente 
+aparecía junta en múltiples métodos.
 
 Cambios manuales:
 
-* Creación de 1 clase nueva
-* Definición de atributos y validaciones básicas
+* Creación de 2 clases nuevas
+* Sustitución parcial de parámetros primitivos por objetos
+* Actualización de métodos relacionados
 
 8. Bad smell: Shotgun Surgery
 

@@ -84,7 +84,7 @@ def main():
     # USA imperial + Español classification
     usa_decorator = DecoratorEspanol(DecoratorUSA(calcHAdapter))
     usa_bmi, usa_class = usa_decorator.indiceMasaCorporal(
-        HealthData(weight=165.0, height=66.93, unit_system=UnitSystem.LBS)
+        HealthData(weight=165.0, height=66.93, unit_system=UnitSystem.INCHES)
     )
     usa_ibw = usa_decorator.pesoCorporalIdeal(
         HealthData(gender=Gender.FEMALE, height=66.93, unit_system=UnitSystem.INCHES)
