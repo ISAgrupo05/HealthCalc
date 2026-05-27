@@ -39,29 +39,7 @@ Cambios manuales:
 * Creación de 2 interfaces nuevas
 * Reorganización inicial de responsabilidades
 
-3. Bad smell: Data Clumps / Long Parameter List
-
-Refactoring aplicado:
-
-* Extract Class
-* Introduce Parameter Object
-
-Tipo:
-
-* Class Refactoring / Method Refactoring
-
-Descripción:
-Se crearon clases como Person y HealthData para encapsular los datos relacionados con una persona (peso, altura, sexo, cintura, 
-cadera, edad y sistema de unidades). Esto permitió reducir listas largas de parámetros y agrupar información que normalmente 
-aparecía junta en múltiples métodos.
-
-Cambios manuales:
-
-* Creación de 2 clases nuevas
-* Sustitución parcial de parámetros primitivos por objetos
-* Actualización de métodos relacionados
-
-8. Bad smell: Shotgun Surgery
+2. Bad smell: Shotgun Surgery
 
 Refactoring aplicado:
 * Introduce Parameter Object
@@ -79,3 +57,28 @@ Cambios:
 * 11 archivos refactorizados: (__init__.py, health_hospital.py, BaseDecoratorRegion.py, 
 BaseDecoratorLanguage.py, Adapter.py, Proxy.py, DecoratorEU.py, DecoratorUSA.py, 
 DecoratorEnglish.py, DecoratorEspanol.py, main.py)
+
+3. Bad smell: Data Clumps
+
+Refactoring aplicado:
+
+* Extract Class
+* Introduce Parameter Object
+
+Tipo:
+
+* Class Refactoring / Method Refactoring
+
+Descripción:
+Se identificaron múltiples grupos de datos que aparecían repetidamente en distintos métodos y clases del sistema, 
+como peso y altura, cintura y cadera, o género y altura. Para corregir este problema se utilizó la clase HealthData 
+como objeto parámetro, agrupando toda la información relacionada con los datos de salud de una persona. Posteriormente 
+se refactorizaron los métodos de cálculo (BMI, Lorentz y WHR), así como el main y los tests, para que utilizaran 
+objetos HealthData en lugar de listas de parámetros primitivas.
+
+Cambios manuales:
+
+* Refactorización de métodos de HealthCalc y HealthCalcImpl para utilizar HealthData
+* Actualización de Adapter, Decorators y main
+* Adaptación de tests y métodos afectados
+* Eliminación de grupos repetidos de parámetros en llamadas a métodos
