@@ -3,6 +3,7 @@ from .exceptions import InvalidHealthDataException
 from .gender import Gender
 from .BMICategory import BMICategory
 from .WHRCategory import WHRCategory
+from .HealthData import HealthData
 
 class HealthCalcImpl(HealthCalc):
 
@@ -51,22 +52,22 @@ class HealthCalcImpl(HealthCalc):
 
         return BMICategory.OBESE_CLASS_III
 
-    def bmi(self, weight: float, height: float) -> float:
-        if weight <= 0:
+    def bmi(self, health_data: HealthData) -> float:
+        if health_data.weight <= 0:
             raise InvalidHealthDataException("Weight must be positive.")
-        if height <= 0:
+        if health_data.height <= 0:
             raise InvalidHealthDataException("Height must be positive.")
-        if weight < 1 or weight > 700:
+        if health_data.weight < 1 or health_data.weight > 700:
             raise InvalidHealthDataException("Weight must be within a possible biological range [1-700] kg.")
-        if height < 0.30 or height > 3.00:
+        if health_data.height < 0.30 or health_data.height > 3.00:
             raise InvalidHealthDataException("Height must be within a possible biological range [0.30-3.00] m.")
-            
-        return weight / (height ** 2)
+
+        return health_data.weight / (health_data.height ** 2)
 
 
-    def lorentz(self, gender: Gender, height: float) -> float:
+    def lorentz(self, health_data: HealthData) -> float:
         try:
-            height_value = float(height)
+            height_value = float(health_data.height)
         except (ValueError, TypeError):
             raise InvalidHealthDataException("Height must be a valid number.")
         
@@ -75,16 +76,16 @@ class HealthCalcImpl(HealthCalc):
         if height_value < 1.00 or height_value > 3.00:
             raise InvalidHealthDataException("Height must be within a possible biological range [1.00-3.00] m.")
         
-        if gender == Gender.MALE:
+        if health_data.gender == Gender.MALE:
             return (height_value*100 - 100) - ((height_value*100 - 150)/4)
         else:
             return (height_value*100 - 100) - ((height_value*100 - 150)/2)
 
         
-    def whr(self, waist:float, hip:float) -> float:
+    def whr(self, health_data: HealthData) -> float:
         try:
-            waist_value = float(waist)
-            hip_value = float(hip)
+            waist_value = float(health_data.waist)
+            hip_value = float(health_data.hip)
         except (TypeError, ValueError):
             raise InvalidHealthDataException("Waist and hip must be numeric values.")
 
@@ -99,16 +100,16 @@ class HealthCalcImpl(HealthCalc):
 
         return waist_value / hip_value
     
-    def whr_classification(self, gender: Gender, whr: float) -> WHRCategory:
+    def whr_classification(self, health_data: HealthData, whr: float) -> WHRCategory:
         if whr < 0:
             raise InvalidHealthDataException("WHR cannot be negative.")
         if whr > 5:
             raise InvalidHealthDataException("WHR must be within a possible biological range [0-5].")
-        if gender is None:
+        if health_data.gender is None:
             raise InvalidHealthDataException("Gender must be either 'M' (Male) or 'F' (Female).")
 
         result = WHRCategory.APPLE
-        if gender == Gender.MALE:
+        if health_data.gender == Gender.MALE:
             if whr <= 0.90:
                 result = WHRCategory.PEAR
         else:

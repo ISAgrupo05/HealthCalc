@@ -10,10 +10,10 @@ class Adapter(HealthHospital):
 
     def indiceMasaCorporal(self, health_data: HealthData) -> tuple:
         metric_data = health_data.normalize()
-        imc = self.calc.bmi(metric_data.weight, metric_data.height)
+        imc = self.calc.bmi(metric_data)
         return imc, self.calc.bmi_classification(imc)
 
     def pesoCorporalIdeal(self, health_data: HealthData) -> float:
         metric_data = health_data.normalize()
-        return self.calc.lorentz(metric_data.gender, metric_data.height)
+        return self.calc.lorentz(metric_data)
     

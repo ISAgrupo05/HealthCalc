@@ -1,8 +1,7 @@
 from abc import ABC, abstractmethod
-from healthcalc import InvalidHealthDataException
-from .gender import Gender
 from .BMICategory import BMICategory
 from .WHRCategory import WHRCategory
+from .HealthData import HealthData
 
 
 class HealthCalc(ABC):
@@ -19,43 +18,40 @@ class HealthCalc(ABC):
         pass
 
     @abstractmethod
-    def bmi(self, weight: float, height: float) -> float:
+    def bmi(self, health_data: HealthData) -> float:
         """Calculate the Body Mass Index (BMI).
         
-        :param weight: Weight (kg)
-        :param height: Height (m)
+        :param health_data: HealthData object containing weight and height
         :return: BMI value (kg/m2)
         :raises InvalidHealthDataException: If data is out of range
         """
         pass
 
     @abstractmethod
-    def lorentz(self, gender: Gender, height: float) -> float:
+    def lorentz(self, health_data: HealthData) -> float:
         """Calculate the Ideal Body Weight (IBW).
         
-        :param gender: Gender gender (M/F)
-        :param height: Height (m)
+        :param health_data: HealthData object containing gender and height
         :return: Lorentz value (kg)
         :raises InvalidHealthDataException: If data is out of range
         """
         pass
 
     @abstractmethod
-    def whr(self, waist: float, hip: float) -> float:
+    def whr(self, health_data: HealthData) -> float:
         """Calculate the Waist-to-Hip Ratio (WHR).
         
-        :param waist: Waist (m)
-        :param hip: Hip (m)
+        :param health_data: HealthData object containing waist and hip measurements
         :return: WHR value
         :raises InvalidHealthDataException: If data is out of range
         """
         pass
 
     @abstractmethod
-    def whr_classification(self, gender: Gender, whr: float) -> WHRCategory:
+    def whr_classification(self, health_data: HealthData, whr: float) -> WHRCategory:
         """Calculate the WHR classification of a person.
         
-        :param gender: Gender gender (M/F)
+        :param health_data: HealthData object containing gender
         :param whr: WHR value
         :return: WHRCategory classification
         :raises InvalidHealthDataException: If data is out of range

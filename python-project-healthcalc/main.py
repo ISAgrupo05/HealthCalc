@@ -178,16 +178,19 @@ def main():
                     while gender_input.upper() != "M" and gender_input.upper() != "F":
                         gender_input = input("Your gender must be either 'M' (male) or 'F' (female), try again: \n")
 
-                    whr = calc.whr(waist, hip)
-                    classification = calc.whr_classification(
-                        Gender.MALE if gender_input.upper() == "M" else Gender.FEMALE, 
-                        whr)
+                    health_data = HealthData(waist=waist, hip=hip, gender=(
+                        Gender.MALE if gender_input.upper() == "M"
+                        else Gender.FEMALE), unit_system=UnitSystem.METRIC
+                    )                    
+
+                    whr = calc.whr(health_data)
+                    classification = calc.whr_classification(health_data, whr)
                     valid3 = True
                 except InvalidHealthDataException:
                     print("Invalid health data, try again.")
 
             print("Your Waist-to-Hip Ratio is: ", whr)
-            print("According to that, your body morfology is: ", classification)
+            print("According to that, your body morphology is: ", classification)
 
         answer4 = input("Are you finished using your Health Calculator? Y/N \n")
 

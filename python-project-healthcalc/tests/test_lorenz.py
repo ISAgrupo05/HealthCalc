@@ -2,6 +2,7 @@ import pytest
 from healthcalc.health_calc_impl import HealthCalcImpl
 from healthcalc.exceptions import InvalidHealthDataException
 from healthcalc.gender import Gender
+from healthcalc.HealthData import HealthData
 
 class TestLorenz:
 
@@ -17,7 +18,7 @@ class TestLorenz:
         height = 1.75
         expected_lorentz = (height*100-100) - ((height*100 -150)/4)
 
-        result = self.health_calc.lorentz(Gender.MALE, height)
+        result = self.health_calc.lorentz(HealthData(gender=Gender.MALE, height=height))
 
         # pytest.approx es el equivalente a assertEquals con delta (0.01) en JUnit
         assert result == pytest.approx(expected_lorentz, abs=0.01)
@@ -28,37 +29,33 @@ class TestLorenz:
         height = 1.75
         expected_lorentz = (height*100-100) - ((height*100 -150)/2)
 
-        result = self.health_calc.lorentz(Gender.FEMALE, height)
+        result = self.health_calc.lorentz(HealthData(gender=Gender.FEMALE, height=height))
 
         # pytest.approx es el equivalente a assertEquals con delta (0.01) en JUnit
         assert result == pytest.approx(expected_lorentz, abs=0.01)
 
     def test_lorentz_altura_cero(self):
         """Lanzar excepción cuando la altura es cero"""
-        sex = Gender.MALE
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.lorentz(sex, 0)
+            self.health_calc.lorentz(HealthData(gender=Gender.MALE, height=0))
 
     def test_lorentz_negativos(self):
         """Lanzar excepción cuando los valores son negativos (Equivalente a assertAll)"""
-        sex = Gender.FEMALE
         height = -1.70
 
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.lorentz(sex, height)
+            self.health_calc.lorentz(HealthData(gender=Gender.FEMALE, height=height))
 
     # --- Tests de Límites e Invalidación para el IBW ---
     @pytest.mark.parametrize("height", [-0.50, 0.0, 0.99], ids=lambda x: f"Altura mínima inválida: {x}m")
     def test_altura_minima_imposible(self, height: float):
         """Lanzar excepción cuando la altura es negativa o menor que 30cm."""
-        sex = Gender.FEMALE
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.lorentz(sex, height)
+            self.health_calc.lorentz(HealthData(gender=Gender.FEMALE, height=height))
 
     @pytest.mark.parametrize("height", [3.01, 3.50, 5.00], ids=lambda x: f"Altura máxima inválida: {x}m")
     def test_altura_maximo_imposible(self, height: float):
         """Lanzar excepción cuando la altura es extremadamente alta."""
-        sex = Gender.MALE
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.lorentz(sex, height)
+            self.health_calc.lorentz(HealthData(gender=Gender.MALE, height=height))
     
