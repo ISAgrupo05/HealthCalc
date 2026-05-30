@@ -20,7 +20,7 @@ def main():
     calcHAdapter = Adapter(calc)
 
     hospital_bmi, classification = calcHAdapter.indiceMasaCorporal(
-        HealthData(weight=75000, height=1.80, unit_system=UnitSystem.GRAMS)
+        HealthData(weight=75000, height=1.80, unit_system=UnitSystem.GRAMS) #75 kg y 1.80 m
     )
 
     print("BMI from hospital system:", hospital_bmi)
@@ -115,6 +115,8 @@ def main():
     )
 
     while not finish:
+        patient_added = False
+
         answer = input("Do you want to know your Body Mass Index? Y/N \n")
 
         while answer.upper() != "Y" and answer.upper() != "N":
@@ -127,9 +129,15 @@ def main():
                     weight = ask_float("Input your weight (kg): \n")
                     height = ask_float("Input your height (m): \n")
 
-                    bmi, classification = RcalcHProxy.indiceMasaCorporal(
-                        HealthData(weight=weight * 1000, height=height, unit_system=UnitSystem.GRAMS)
-                    )
+                    if patient_added:
+                        bmi, classification = calcHAdapter.indiceMasaCorporal(
+                            HealthData(weight=weight * 1000, height=height, unit_system=UnitSystem.GRAMS)
+                        )
+                    else:
+                        bmi, classification = RcalcHProxy.indiceMasaCorporal(
+                            HealthData(weight=weight * 1000, height=height, unit_system=UnitSystem.GRAMS)
+                        )
+                        patient_added = True
                     valid = True
                 except InvalidHealthDataException as e:
                     print(e)
@@ -153,9 +161,15 @@ def main():
                     while gender_input.upper() != "M" and gender_input.upper() != "F":
                         gender_input = input("Your gender must be either 'M' (male) or 'F' (female), try again: \n")
 
-                    ibw = RcalcHProxy.pesoCorporalIdeal(
-                        HealthData(gender=Gender.MALE if gender_input.upper() == "M" else Gender.FEMALE, height=height, unit_system=UnitSystem.GRAMS)
-                    )
+                    if patient_added:
+                        ibw = calcHAdapter.pesoCorporalIdeal(
+                            HealthData(gender=Gender.MALE if gender_input.upper() == "M" else Gender.FEMALE, height=height, unit_system=UnitSystem.GRAMS)
+                        )
+                    else:
+                        ibw = RcalcHProxy.pesoCorporalIdeal(
+                            HealthData(gender=Gender.MALE if gender_input.upper() == "M" else Gender.FEMALE, height=height, unit_system=UnitSystem.GRAMS)
+                        )
+                        patient_added = True
                     valid2 = True
                 except InvalidHealthDataException:
                     print("Invalid health data, try again.")
@@ -210,7 +224,7 @@ def main():
 
     print(
         "Average weight:",
-        Rstats.pesoMedio()/1000,
+        Rstats.pesoMedio(),
         "kg"
     )
 

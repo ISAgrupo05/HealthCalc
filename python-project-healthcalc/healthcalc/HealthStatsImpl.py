@@ -67,4 +67,8 @@ class HealthStatsImpl(HealthStats):
         return self.mujeres
 
     def numTotalPacientes(self) -> int:
-        return (len(self.imcs) + self.hombres + self.mujeres)
+        # The total number of patients should be the best estimate from
+        # the recorded pieces of data. Some patients may lack gender
+        # information, so count as the maximum of recorded lists or
+        # the sum of gender counters to avoid double-counting.
+        return max(len(self.imcs), len(self.alturas), len(self.pesos), self.hombres + self.mujeres)

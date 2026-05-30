@@ -14,19 +14,21 @@ class BaseDecoratorLanguage(HealthHospital, ABC):
     def __init__(self, healthcalc: HealthHospital):
         self.healthcalc = healthcalc
 
-    @abstractmethod
     def indiceMasaCorporal(self, health_data: HealthData) -> tuple:
         """
-        Calcula el índice de masa corporal con clasificación en el idioma especificado.
+        Calcula el índice de masa corporal y traduce la clasificación al idioma del decorador.
         """
-        pass
+        result = self.healthcalc.indiceMasaCorporal(health_data)
+        bmi = result[0]
+        clasificacion_original = result[1]
+        clasificacion_traducida = self._traducir_clasificacion_bmi(clasificacion_original)
+        return bmi, clasificacion_traducida
 
-    @abstractmethod
     def pesoCorporalIdeal(self, health_data: HealthData) -> float:
         """
-        Calcula el peso corporal ideal.
+        Calcula el peso corporal ideal utilizando la implementación subyacente.
         """
-        pass
+        return self.healthcalc.pesoCorporalIdeal(health_data)
 
     @abstractmethod
     def _traducir_clasificacion_bmi(self, clasificacion: BMICategory) -> str:

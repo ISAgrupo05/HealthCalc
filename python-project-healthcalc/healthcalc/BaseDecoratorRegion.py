@@ -12,21 +12,20 @@ class BaseDecoratorRegion(HealthHospital, ABC):
     def __init__(self, healthcalc: HealthHospital):
         self.healthcalc = healthcalc
 
-    @abstractmethod
     def indiceMasaCorporal(self, health_data: HealthData) -> tuple:
         """
-        Calcula el índice de masa corporal.
-        Las unidades de entrada y salida dependen de la región.
+        Calcula el índice de masa corporal usando datos normalizados a unidad métrica.
         """
-        pass
+        metric_data = health_data.normalize()
+        return self.healthcalc.indiceMasaCorporal(metric_data)
 
-    @abstractmethod
     def pesoCorporalIdeal(self, health_data: HealthData) -> float:
         """
-        Calcula el peso corporal ideal.
-        Las unidades de entrada y salida dependen de la región.
+        Calcula el peso corporal ideal y convierte el resultado a las unidades de la región.
         """
-        pass
+        metric_data = health_data.normalize()
+        peso_ideal_kg = self.healthcalc.pesoCorporalIdeal(metric_data)
+        return self._convertir_peso_salida(peso_ideal_kg)
 
     @abstractmethod
     def _convertir_peso_entrada(self, peso: float) -> float:

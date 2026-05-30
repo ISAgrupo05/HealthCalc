@@ -14,20 +14,6 @@ class DecoratorEU(BaseDecoratorRegion):
         super().__init__(healthcalc)
         self.region = "EU"
 
-    def indiceMasaCorporal(self, health_data: HealthData) -> tuple:
-        """
-        Calcula BMI. En EU, peso está en kg y altura en m.
-        """
-        metric_data = health_data.normalize()
-        return self.healthcalc.indiceMasaCorporal(metric_data)
-
-    def pesoCorporalIdeal(self, health_data: HealthData) -> float:
-        """
-        Calcula peso corporal ideal. En EU, altura en m, resultado en kg.
-        """
-        metric_data = health_data.normalize()
-        peso_ideal_kg = self.healthcalc.pesoCorporalIdeal(metric_data)
-        return peso_ideal_kg
 
     def _convertir_peso_entrada(self, peso: float) -> float:
         """Convierte el peso de entrada de kg a gramos, porque el Adapter espera gramos."""
