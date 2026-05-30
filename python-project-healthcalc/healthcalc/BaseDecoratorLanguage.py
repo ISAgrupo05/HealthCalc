@@ -30,6 +30,20 @@ class BaseDecoratorLanguage(HealthHospital, ABC):
         """
         return self.healthcalc.pesoCorporalIdeal(health_data)
 
+    def whr(self, health_data: HealthData) -> float:
+        """
+        Calcula el índice cintura-cadera utilizando la implementación subyacente.
+        """
+        return self.healthcalc.whr(health_data)
+
+    def whr_classification(self, health_data: HealthData, whr: float) -> str:
+        """
+        Calcula la clasificación WHR y traduce al idioma del decorador.
+        """
+        result = self.healthcalc.whr_classification(health_data, whr)
+        clasificacion_traducida = self._traducir_clasificacion_whr(result)
+        return clasificacion_traducida
+
     @abstractmethod
     def _traducir_clasificacion_bmi(self, clasificacion: BMICategory) -> str:
         """
