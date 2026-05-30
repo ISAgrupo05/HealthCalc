@@ -1,6 +1,8 @@
 from .BaseDecoratorLanguage import BaseDecoratorLanguage
 from .HealthData import HealthData
 from .health_hospital import HealthHospital
+from .BMICategory import BMICategory
+from .WHRCategory import WHRCategory
 
 
 class DecoratorEspanol(BaseDecoratorLanguage):
@@ -29,7 +31,7 @@ class DecoratorEspanol(BaseDecoratorLanguage):
         """
         return self.healthcalc.pesoCorporalIdeal(health_data)
 
-    def _traducir_clasificacion_bmi(self, clasificacion: str) -> str:
+    def _traducir_clasificacion_bmi(self, clasificacion: BMICategory) -> str:
         """
         Traduce clasificación de BMI al español.
         """
@@ -41,7 +43,7 @@ class DecoratorEspanol(BaseDecoratorLanguage):
         }
         return traducciones.get(clasificacion, clasificacion)
 
-    def _traducir_clasificacion_whr(self, clasificacion: str) -> str:
+    def _traducir_clasificacion_whr(self, clasificacion: WHRCategory) -> str:
         """
         Traduce clasificación de WHR al español.
         """

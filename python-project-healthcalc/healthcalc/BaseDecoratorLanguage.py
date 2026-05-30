@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from .health_hospital import HealthHospital
 from .HealthData import HealthData
+from .BMICategory import BMICategory
+from .WHRCategory import WHRCategory
 
 
 class BaseDecoratorLanguage(HealthHospital, ABC):
@@ -27,14 +29,14 @@ class BaseDecoratorLanguage(HealthHospital, ABC):
         pass
 
     @abstractmethod
-    def _traducir_clasificacion_bmi(self, clasificacion: str) -> str:
+    def _traducir_clasificacion_bmi(self, clasificacion: BMICategory) -> str:
         """
         Traduce la clasificación de BMI al idioma especificado.
         """
         pass
 
     @abstractmethod
-    def _traducir_clasificacion_whr(self, clasificacion: str) -> str:
+    def _traducir_clasificacion_whr(self, clasificacion: WHRCategory) -> str:
         """
         Traduce la clasificación de WHR al idioma especificado.
         """

@@ -1,7 +1,9 @@
 import pytest
 from healthcalc.health_calc_impl import HealthCalcImpl
 from healthcalc.exceptions import InvalidHealthDataException
-
+from healthcalc.gender import Gender
+from healthcalc.WHRCategory import WHRCategory
+from healthcalc.HealthData import HealthData
 
 class TestWHR:
 
@@ -16,12 +18,12 @@ class TestWHR:
         hip = 0.90
         waist = 0.70
         expected_whr = waist / hip
-        assert self.health_calc.whr(waist, hip) == pytest.approx(expected_whr, abs=1e-5)
+        assert self.health_calc.whr(HealthData(waist=waist, hip=hip)) == pytest.approx(expected_whr, abs=1e-5)
 
     def test_whr_extremos_validos(self):
-        assert self.health_calc.whr(0.45, 0.45) == pytest.approx(1.0)
-        assert self.health_calc.whr(3.0, 0.45) == pytest.approx(3.0 / 0.45)
-        assert self.health_calc.whr(0.45, 3.0) == pytest.approx(0.45 / 3.0)
+        assert self.health_calc.whr(HealthData(waist=0.45, hip=0.45)) == pytest.approx(1.0)
+        assert self.health_calc.whr(HealthData(waist=3.0, hip=0.45)) == pytest.approx(3.0 / 0.45)
+        assert self.health_calc.whr(HealthData(waist=0.45, hip=3.0)) == pytest.approx(0.45 / 3.0)
 
 
     def test_whr_cintura_0(self):
@@ -30,7 +32,7 @@ class TestWHR:
         hip = 0.90
 
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.whr(waist, hip)
+            self.health_calc.whr(HealthData(waist=waist, hip=hip))
 
 
     def test_whr_cadera_0(self):
@@ -39,7 +41,7 @@ class TestWHR:
         hip = 0
 
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.whr(waist, hip)
+            self.health_calc.whr(HealthData(waist=waist, hip=hip))
 
     def test_whr_negativos(self):
         """Lanzar excepción cuando los valores son negativos (Equivalente a assertAll)"""
@@ -47,24 +49,24 @@ class TestWHR:
         hip = 0.90
 
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.whr(waist, hip)
+            self.health_calc.whr(HealthData(waist=waist, hip=hip))
 
         waist = 0.70
         hip = -0.90
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.whr(waist, hip)
+            self.health_calc.whr(HealthData(waist=waist, hip=hip))
 
     # --- Tests de Límites e Invalidación para el WHR ---
     @pytest.mark.parametrize("waist", [0.44, 3.01])
     def test_whr_cintura_fuera_rango(self, waist):
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.whr(waist, 100.0)
+            self.health_calc.whr(HealthData(waist=waist, hip=100.0))
 
     @pytest.mark.parametrize("hip", [0.44, 3.01])
     def test_whr_cadera_fuera_rango(self, hip):
         # use a valid waist to ensure the hip-range check is reached
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.whr(1.0, hip)
+            self.health_calc.whr(HealthData(waist=1.0, hip=hip))
 
 
 
@@ -73,35 +75,27 @@ class TestWHR:
     @pytest.mark.parametrize(
         "sex,whr,expected",
         [
-            ("M", 0.90, "Pear"), ("M", 0.85, "Pear"),
-            ("M", 0.91, "Apple"), ("M", 1.50, "Apple"),
-            ("F", 0.85, "Pear"), ("F", 0.80, "Pear"),
-            ("F", 0.86, "Apple"), ("F", 1.00, "Apple"),
+            (Gender.MALE, 0.90, WHRCategory.PEAR), (Gender.MALE, 0.85, WHRCategory.PEAR),
+            (Gender.MALE, 0.91, WHRCategory.APPLE), (Gender.MALE, 1.50, WHRCategory.APPLE),
+            (Gender.FEMALE, 0.85, WHRCategory.PEAR), (Gender.FEMALE, 0.80, WHRCategory.PEAR),
+            (Gender.FEMALE, 0.86, WHRCategory.APPLE), (Gender.FEMALE, 1.00, WHRCategory.APPLE),
         ],
     )
     def test_whr_classification_valida(self, sex, whr, expected):
-        assert self.health_calc.whr_classification(sex, whr) == expected
+        assert self.health_calc.whr_classification(HealthData(gender=sex), whr) == expected
 
 
     # --- Tests de Límites e Invalidación para la clasificación WHR ---
 
-    @pytest.mark.parametrize("sex, whr", [("M", -0.85), ("F", -0.70), ("M", -0.90)])
+    @pytest.mark.parametrize("sex, whr", [(Gender.MALE, -0.85), (Gender.FEMALE, -0.70), (Gender.MALE, -0.90)])
     def test_whr_classification_minimo_imposible(self, sex, whr: float):
         """Lanzar excepción cuando el WHR es negativo."""
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.whr_classification(sex, whr)
+            self.health_calc.whr_classification(HealthData(gender=sex), whr)
 
-    @pytest.mark.parametrize("sex, whr", [("M", 5.01), ("F", 10.0), ("M", 100.0)])
+    @pytest.mark.parametrize("sex, whr", [(Gender.MALE, 5.01), (Gender.FEMALE, 10.0), (Gender.MALE, 100.0)])
     def test_whr_classification_excesivo(self, sex, whr: float):
         """Lanzar excepción cuando el WHR es extremadamente alto."""
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.whr_classification(sex, whr)
+            self.health_calc.whr_classification(HealthData(gender=sex), whr)
 
-    @pytest.mark.parametrize("sex",["X", " ", "Male"], ids=lambda x: f"Sexo inválido: '{x}'")
-    
-    def test_whr_classification_sexo_invalido(self, sex):
-        """Lanzar excepción cuando el sexo es inválido."""
-        whr = 0.85
-
-        with pytest.raises(InvalidHealthDataException):
-            self.health_calc.whr_classification(sex, whr)

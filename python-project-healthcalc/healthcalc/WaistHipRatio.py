@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 from .person import Person
+from .gender import Gender
+from .WHRCategory import WHRCategory
 
 
 class WaistHipRatio(ABC):
@@ -26,6 +28,6 @@ class WaistHipRatio(ABC):
         pass
 
     @abstractmethod
-    def category(self, sex: str, value: float) -> str:
+    def category(self, gender: Gender, value: float) -> WHRCategory:
         """Devuelve la categoría (p.ej. 'Pear' o 'Apple') según sexo y valor."""
         pass
