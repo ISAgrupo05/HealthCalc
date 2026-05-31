@@ -521,3 +521,125 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 ### Apartado 3c. Patrón Decorator
 
 ![Patrón Decorator](design_patterns/Patron_Decorator.png)
+
+## Práctica 7: Refactorings
+
+<details>
+<summary><b>Primitive Obsession</b></summary>
+
+* **Refactoring aplicado:**
+    * Replace Type Code with Enum
+    
+* **Tipo:**
+    * Attribute Refactoring
+        
+* **Descripción:**
+Se sustituyeron valores primitivos representados mediante strings ("M", "F", "Pear", "Apple", etc.) por enums tipados como Gender, BMICategory, WHRCategory, Language y UnitSystem. Esto mejora la legibilidad, reduce errores relacionados con comparaciones de cadenas y permite un mayor control de tipos dentro del dominio de la aplicación.
+
+* **Cambios manuales:**
+    * Creación de 5 enums
+    * Modificación de imports y comparaciones relacionadas
+    * Adaptación de tests y métodos afectados
+ 
+</details>
+<details>
+<summary><b>Large Class / Divergent Change</b></summary>
+
+* **Refactoring aplicado:**
+    * Extract Interface
+    
+* **Tipo:**
+    * Class Refactoring
+        
+* **Descripción:**
+Se separaron las distintas responsabilidades de cálculo creando interfaces independientes como IdealBodyWeight y WaistHipRatio. 
+Esto permite desacoplar funcionalidades y adaptar el diseño al nuevo esquema UML proporcionado en la práctica.
+
+* **Cambios manuales:**
+    * Creación de 2 interfaces nuevas
+    * Reorganización inicial de responsabilidades
+ 
+</details>
+<details>
+<summary><b>Shotgun Surgery</b></summary>
+
+* **Refactoring aplicado:**
+    * Introduce Parameter Object
+    * Move Method
+    
+* **Tipo:**
+    * Method Refactoring
+        
+* **Descripción:**
+    * Crear HealthData.py como objeto parámetro para agrupar peso, altura, sexo, cintura, cadera y sistema de unidades.
+    * Refactorizar clases Adapter,Proxy, Decorators y may para que utilicen ese objeto.
+
+* **Cambios manuales:**
+    * 1 archivo nuevo: HealthData.py
+    * 11 archivos refactorizados: (__init__.py, health_hospital.py, BaseDecoratorRegion.py, BaseDecoratorLanguage.py, Adapter.py, Proxy.py, DecoratorEU.py, DecoratorUSA.py, DecoratorEnglish.py, DecoratorEspanol.py, main.py)
+ 
+</details>
+<details>
+<summary><b>Data Clumps</b></summary>
+
+* **Refactoring aplicado:**
+    * Extract Class
+    * Introduce Parameter Object
+    
+* **Tipo:**
+    * Class Refactoring / Method Refactoring
+        
+* **Descripción:**
+Se identificaron múltiples grupos de datos que aparecían repetidamente en distintos métodos y clases del sistema, como peso y altura, cintura y cadera, o género y altura. Para corregir este problema se utilizó la clase HealthData como objeto parámetro, agrupando toda la información relacionada con los datos de salud de una persona. Posteriormente se refactorizaron los métodos de cálculo (BMI, Lorentz y WHR), así como el main y los tests, para que utilizaran objetos HealthData en lugar de listas de parámetros primitivas.
+
+* **Cambios manuales:**
+    * Refactorización de métodos de HealthCalc y HealthCalcImpl para utilizar HealthData
+    * Actualización de Adapter, Decorators y main
+    * Adaptación de tests y métodos afectados
+    * Eliminación de grupos repetidos de parámetros en llamadas a métodos
+ 
+</details>
+<details>
+<summary><b>Long Method</b></summary>
+
+* **Refactoring aplicado:**
+    * Extract Method
+    * Replace Inline Code with Function Call
+    
+* **Tipo:**
+    * Class Refactoring / Method Refactoring
+        
+* **Descripción:**
+El método main() había crecido hasta superar ampliamente las 200 líneas, mezclando lógica de interacción con el usuario, validación de entradas, cálculos de métricas (BMI, IBW, WHR), gestión de estadísticas y ejecución de pruebas de patrones de diseño. Este tamaño excesivo dificultaba la lectura, el mantenimiento y la extensibilidad del código, además de violar el principio de responsabilidad única. Para corregirlo, se aplicó Extract Method, dividiendo el método en múltiples funciones pequeñas y cohesionadas. Posteriormente se sustituyeron los bloques de código originales por llamadas a estas nuevas funciones, reduciendo el main a un punto de orquestación claro y legible.
+
+* **Cambios manuales:**
+    * Creación de funciones auxiliares para validación (ask_float, ask_yes_no, ask_gender)
+    * Extracción de la lógica de métricas en funciones independientes (interactive_bmi, interactive_ibw, interactive_whr)
+    * Creación de run_interactive_loop() para encapsular el bucle principal
+    * Creación de show_final_stats() y run_pattern_tests()
+    * Sustitución del código inline del main por llamadas a las nuevas funciones
+    * Reducción del método main() a ~15 líneas, actuando únicamente como coordinador del flujo
+
+</details>
+<details>
+<summary><b>Code Duplication / Repeated Validation Logic</b></summary>
+
+* **Refactoring aplicado:**
+    * Extract Method
+    * Consolidate Duplicate Conditional Fragments
+    * Replace Inline Code with Function Call
+    
+* **Tipo:**
+    * Method Refactoring
+        
+* **Descripción:**
+La clase HealthCalcImpl contenía múltiples fragmentos de código duplicado relacionados con validaciones numéricas, comprobaciones de positividad y verificación de rangos biológicos. Estas validaciones aparecían repetidas en los métodos bmi(), lorentz(), whr() y whr_classification(), lo que dificultaba el mantenimiento y aumentaba el riesgo de inconsistencias al modificar reglas de validación. Para resolver este problema se extrajeron métodos auxiliares privados (_to_float, _validate_positive, _validate_range) que centralizan toda la lógica repetida. Esto reduce la duplicación, mejora la cohesión y permite modificar las reglas de validación en un único punto.
+
+* **Cambios manuales:**
+    * Creación de métodos auxiliares privados para validación (_to_float, _validate_positive, _validate_range)
+    * Sustitución de bloques repetidos de try/except y comprobaciones de rango por llamadas a los nuevos métodos
+    * Simplificación de los métodos bmi(), lorentz(), whr() y whr_classification()
+    * Eliminación de duplicación estructural y semántica en validaciones numéricas y de rangos
+    * Mejora de la legibilidad y mantenibilidad de la clase HealthCalcImpl
+
+</details>
