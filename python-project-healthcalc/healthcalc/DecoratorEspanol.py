@@ -15,22 +15,6 @@ class DecoratorEspanol(BaseDecoratorLanguage):
         super().__init__(healthcalc)
         self.idioma = "Español"
 
-    def indiceMasaCorporal(self, health_data: HealthData) -> tuple:
-        """
-        Calcula BMI y devuelve la clasificación en español.
-        """
-        result = self.healthcalc.indiceMasaCorporal(health_data)
-        bmi = result[0]
-        clasificacion_original = result[1]
-        clasificacion_es = self._traducir_clasificacion_bmi(clasificacion_original)
-        return bmi, clasificacion_es
-
-    def pesoCorporalIdeal(self, health_data: HealthData) -> float:
-        """
-        Calcula el peso corporal ideal.
-        """
-        return self.healthcalc.pesoCorporalIdeal(health_data)
-
     def _traducir_clasificacion_bmi(self, clasificacion: BMICategory) -> str:
         """
         Traduce clasificación de BMI al español.

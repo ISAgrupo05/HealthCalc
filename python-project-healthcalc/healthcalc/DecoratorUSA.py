@@ -14,21 +14,6 @@ class DecoratorUSA(BaseDecoratorRegion):
         super().__init__(healthcalc)
         self.region = "USA"
 
-    def indiceMasaCorporal(self, health_data: HealthData) -> tuple:
-        """
-        Calcula BMI. En USA, peso está en libras (lbs) y altura en pulgadas (inches).
-        Convierte a kg y m para el cálculo interno.
-        """
-        metric_data = health_data.normalize()
-        return self.healthcalc.indiceMasaCorporal(metric_data)
-
-    def pesoCorporalIdeal(self, health_data: HealthData) -> float:
-        """
-        Calcula peso corporal ideal. En USA, altura en pulgadas, resultado en libras.
-        """
-        metric_data = health_data.normalize()
-        peso_ideal_kg = self.healthcalc.pesoCorporalIdeal(metric_data)
-        return HealthData.kg_to_lbs(peso_ideal_kg)
 
     def _convertir_peso_entrada(self, peso: float) -> float:
         """
