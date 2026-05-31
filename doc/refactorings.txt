@@ -1,3 +1,4 @@
+
 1. Bad smell: Primitive Obsession
 
 Refactoring aplicado:
@@ -39,7 +40,7 @@ Cambios manuales:
 * Creación de 2 interfaces nuevas
 * Reorganización inicial de responsabilidades
 
-2. Bad smell: Shotgun Surgery
+3. Bad smell: Shotgun Surgery
 
 Refactoring aplicado:
 * Introduce Parameter Object
@@ -58,7 +59,7 @@ Cambios:
 BaseDecoratorLanguage.py, Adapter.py, Proxy.py, DecoratorEU.py, DecoratorUSA.py, 
 DecoratorEnglish.py, DecoratorEspanol.py, main.py)
 
-3. Bad smell: Data Clumps
+4. Bad smell: Data Clumps
 
 Refactoring aplicado:
 
@@ -83,7 +84,7 @@ Cambios manuales:
 * Adaptación de tests y métodos afectados
 * Eliminación de grupos repetidos de parámetros en llamadas a métodos
 
-4. Bad smell: Long Method
+5. Bad smell: Long Method
 
 Refactoring aplicado:
 
@@ -111,7 +112,7 @@ Cambios manuales:
 * Sustitución del código inline del main por llamadas a las nuevas funciones
 * Reducción del método main() a ~15 líneas, actuando únicamente como coordinador del flujo
 
-5. Bad smell: Code Duplication / Repeated Validation Logic
+6. Bad smell: Code Duplication / Repeated Validation Logic
 
 Refactoring aplicado:
 
