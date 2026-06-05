@@ -1,10 +1,88 @@
 from healthcalc.health_calc_impl import HealthCalcImpl
 from healthcalc.exceptions import InvalidHealthDataException
+from healthcalc.Adapter import Adapter
+from healthcalc.Proxy import HealthCalcProxy
+from healthcalc.HealthStatsImpl import HealthStatsImpl
 
 def main():
-    calc = HealthCalcImpl()
+       
+    calc = HealthCalcImpl.getInstance() #test Singleton
 
-    print("Welcome to your Health Calculator!")
+    print("\n--- TESTING ADAPTER PATTERN ---")
+
+    calcHAdapter = Adapter(calc)
+
+    hospital_bmi, classification = calcHAdapter.indiceMasaCorporal(75000, 1.80)
+
+    print("BMI from hospital system:", hospital_bmi)
+
+    print("BMI Classification:", classification)
+
+    ideal_weight = calcHAdapter.pesoCorporalIdeal("M", 1.80)
+
+    print("Ideal Body Weight:", ideal_weight)
+
+    print("\n--- TESTING PROXY PATTERN: STATS ---")
+    
+    stats = HealthStatsImpl()
+
+    calcHProxy = HealthCalcProxy(
+        calcHAdapter,
+        stats
+    )
+    
+    result = calcHProxy.indiceMasaCorporal(
+        78000,
+        1.83
+    )
+
+    result2 = calcHProxy.indiceMasaCorporal(
+        90000,
+        1.75
+    )
+
+
+    calcHProxy.pesoCorporalIdeal(
+        "M",
+        1.83
+    )
+
+    calcHProxy.pesoCorporalIdeal(
+        "F",
+        1.65
+    )
+
+    print(
+        "Average height:",
+        stats.alturaMedia()
+    )
+
+    print(
+        "Average weight:",
+        stats.pesoMedio()
+    )
+
+    print(
+        "Average BMI:",
+        stats.imcMedio()
+    )
+
+    print(
+        "Men:",
+        stats.numSexoH()
+    )
+
+    print(
+        "Women:",
+        stats.numSexoM()
+    )
+    
+    print(
+        "Total patients:",
+        stats.numTotalPacientes()
+    )
+
+    print("\nWelcome to your Health Calculator!")
 
     finish = False
 
@@ -16,6 +94,13 @@ def main():
                 print("Value must be a number, try again.")
 
     
+    Rstats = HealthStatsImpl()
+
+    RcalcHProxy = HealthCalcProxy(
+        calcHAdapter,
+        Rstats
+    )
+
     while not finish:
         answer = input("Do you want to know your Body Mass Index? Y/N \n")
 
@@ -29,8 +114,8 @@ def main():
                     weight = ask_float("Input your weight (kg): \n")
                     height = ask_float("Input your height (m): \n")
 
-                    bmi = calc.bmi(weight, height)
-                    classification = calc.bmi_classification(bmi)
+                    bmi, classification = RcalcHProxy.indiceMasaCorporal(weight*1000, height)
+                    # classification = calc.bmi_classification(bmi)
                     valid = True
                 except InvalidHealthDataException as e:
                     print(e)
@@ -54,7 +139,7 @@ def main():
                     while sex.upper() != "M" and sex.upper() != "F":
                         sex = input("Your sex must be either 'M' (male) or 'F' (female), try again: \n")
 
-                    ibw = calc.lorentz(sex.upper(), height)
+                    ibw = RcalcHProxy.pesoCorporalIdeal(sex.upper(), height)
                     valid2 = True
                 except InvalidHealthDataException:
                     print("Invalid health data, try again.")
@@ -93,6 +178,42 @@ def main():
         
         if answer4.upper() == "Y":
             finish = True
+    
+    print("\n--- REAL STATS ---")
+
+    print(
+        "Average height:",
+        Rstats.alturaMedia(),
+        "m"
+    )
+
+    print(
+        "Average weight:",
+        Rstats.pesoMedio()/1000,
+        "kg"
+    )
+
+    print(
+        "Average BMI:",
+        Rstats.imcMedio()
+    )
+
+    print(
+        "Men:",
+        Rstats.numSexoH()
+    )
+
+    print(
+        "Women:",
+        Rstats.numSexoM()
+    )
+    
+    print(
+        "Total patients:",
+        Rstats.numTotalPacientes()
+    )
+        
+
 
 
 if __name__ == "__main__":
