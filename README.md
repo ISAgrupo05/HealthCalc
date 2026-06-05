@@ -36,7 +36,6 @@ Para que el proyecto cumpla con estándares de software médico, se deben inclui
 </details>
 
 
-
 ## Métricas de HealthCalc
 
 <details>
@@ -376,5 +375,151 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 - [Caso de Uso: BMI](doc/Caso_uso_BMI.txt)
 - [Caso de Uso: WHR](doc/Caso_Uso_WHR.txt)
 - [Caso de Uso: IBW](doc/Caso_uso_Lorentz.txt)
+
+## Behaviour Driven Development  
+
+<details>
+<summary><b>BMI</b></summary>
+
+### Feature: Cálculo del BMI
+
+- **Archivo .feature:** [python-project-healthcalc/features/calcBMI.feature](python-project-healthcalc/features/calcBMI.feature)
+- **Historia de usuario:** 
+
+    ```
+    As usuario de la calculadora
+    I want calcular el índice de masa corporal
+    So that conocer mi estado de salud mediante la métrica elegida
+    ```
+
+#### Escenarios de Error Handling (BMI)
+
+1. Cálculo de BMI con peso anumérico
+2. Cálculo de BMI con altura anumérica
+3. Cálculo de BMI con peso cero
+4. Cálculo de BMI con altura cero
+5. Cálculo de BMI con peso negativo
+6. Cálculo de BMI con altura negativa
+7. Cálculo de BMI con peso exorbitante
+8. Cálculo de BMI con altura exorbitante
+9. Cálculo de BMI con peso desbordado por encima
+10. Cálculo de BMI con peso desbordado por debajo
+11. Cálculo de BMI con altura desbordada por encima
+12. Cálculo de BMI con altura desbordada por debajo
+
+#### Escenario de Performance (BMI)
+
+- Cálculo de BMI con valores normales
+
+#### Scenario Outline (BMI)
+
+- Cálculo de BMI con valores de peso y altura válidos
+
+### Feature: Obtención de la clasificación BMI
+
+- **Archivo .feature:** [python-project-healthcalc/features/clasBMI.feature](python-project-healthcalc/features/clasBMI.feature)
+- **Historia de usuario:** 
+    
+    ```
+    As usuario de la calculadora
+    I want obtener mi clasificación BMI
+    So that conocer mi estado de salud
+    ```
+
+#### Escenarios de Error Handling (clasificación BMI)
+
+1. Clasificación con BMI negativo
+2. Clasificación con BMI exorbitante
+
+#### Scenario Outline (clasificación BMI)
+
+- Clasificación BMI con valores normales de BMI
+
+</details>
+
+<details>
+<summary><b>IBW</b></summary>
+
+### Feature: Cálculo del IBW
+
+- **Archivo .feature:** [python-project-healthcalc/features/calcIBW.feature](python-project-healthcalc/features/calcIBW.feature)
+- **Historia de usuario:** 
+    
+    ```
+    As usuario de la calculadora
+    I want calcular el peso ideal corporal
+    So that conocer mi estado de salud mediante la métrica elegida
+    ```
+
+#### Escenarios de Error Handling (IBW)
+
+1. Cálculo de IBW con sexo inválido
+2. Cálculo de IBW con altura anumérica
+3. Cálculo de IBW con altura cero
+4. Cálculo de IBW con altura negativa
+5. Cálculo de IBW con altura por debajo del rango biológico
+6. Cálculo de IBW con altura por encima del rango biológico
+
+#### Escenario de Performance (IBW)
+
+- Cálculo de IBW con valores normales
+
+#### Scenario Outline (IBW)
+
+- Cálculo de IBW con valores de altura y sexo válidos
+
+</details>
+
+<details>
+<summary><b>WHR</b></summary>
+
+### Feature: Cálculo del WHR
+- **Archivo .feature:** [python-project-healthcalc/features/calcWHR.feature](python-project-healthcalc/features/calcWHR.feature)
+- **Historia de usuario:**
+
+    ```
+    As usuario de la calculadora
+    I want to calcular el ratio cintura-cadera
+    So that conocer mi estado de salud mediante la métrica elegida
+    ```
+
+#### Escenarios de Error Handling (WHR)
+
+1. Cálculo del WHR con perímetro de cintura anumérico
+2. Cálculo de WHR con perímetro de cadera anumérico
+3. Cálculo de WHR con perímetro de cintura cero
+4. Cálculo de WHR con perímetro de cadera cero
+5. Cálculo de WHR con perímetro de cintura negativo
+6. Cálculo de WHR con perímetro de cadera negativo
+7. Cálculo de WHR con perímetro de cintura exorbitante
+8. Cálculo de WHR con perímetro de cadera exorbitante
+9. Cálculo de WHR con perímetro de cintura desbordado
+10. Cálculo de WHR con perímetro de cadera desbordado
+11. Cálculo de WHR con perímetro de ambos desbordado
+
+#### Escenario de Performance (WHR)
+
+- Cálculo de WHR con perímetro de ambos igual
+
+#### Scenario Outline (WHR)
+- Cálculo de WHR con valores de cintura y cadera válido
+
+### Feature: Clasificación WHR
+- **Archivo.feature:** [python-project-healthcalc/features/clasWHR.feature](python-project-healthcalc/features/clasWHR.feature)
+- **Historia de usuario:**
+
+    ```
+    As usuario de la calculadora
+    I want to obtener mi clasificación WHR
+    So that conocer mi morfología y estado de salud
+    ```
+
+#### Escenarios de Error Handling (clasificación WHR)
+1. Clasificación con WHR negativo
+2. Clasificación con WHR exorbitante
+3. Clasificación con sexo inválido
+
+#### Scenario Outline (clasificación WHR)
+- Clasificación con sexo y WHR normales
 
 </details>
