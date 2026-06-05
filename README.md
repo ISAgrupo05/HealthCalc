@@ -36,7 +36,6 @@ Para que el proyecto cumpla con estándares de software médico, se deben inclui
 </details>
 
 
-
 ## Métricas de HealthCalc
 
 <details>
@@ -181,6 +180,27 @@ Para que el proyecto cumpla con estándares de software médico, se deben inclui
     - **Fuerte** (ejercicio 6-7 días/semana): `TMB × 1.725`
     - **Muy fuerte** (atleta o trabajo físico pesado): `TMB × 1.9`
 
+---
+
+* **M12: Malnutrition Universal Screening Tool (MUST):** El MUST es un instrumento de cribado clínico que permite identificar a adultos malnutridos, con riesgo de desnutrición u obesos. Se mide mediante las siguientes puntuaciones:
+
+    1. **Puntuación del IMC:**
+        - IMC superior a 20 = 0 puntos
+        - IMC entre 18.5 y 20 = 1 punto
+        - IMC inferior a 18.5 = 2 puntos
+    2. **Puntuación por el porcentaje de pérdida de peso en los últimos 3-6 meses:**
+        - Menos del 5% = 0 puntos
+        - Entre el 5% y el 10% = 1 punto
+        - Más del 10% = 2 puntos
+    3. **Puntuación del efecto de las enfermedades agudas:**
+        - Si el paciente está muy enfermo y no ha habido, o es probable que no vaya a haber, aporte nutricional durante más de 5 días = 2 puntos
+
+Al sumar las puntuaciones, se puede clasificar el riesgo global de malnutrición:
+
+- **0** = Riesgo bajo, recomendada asistencia clínica habitual.
+- **1** = Riesgo intermedio, recomendada observación.
+- **2 o más** = Riesgo alto, recomendada intervención lo antes posible.
+
 </details>
 
 <details>
@@ -301,9 +321,15 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 
 ### Dependencias
 - Python 3.13+
-- pytest
-- coverage
-- pytest-cov
+- pytest 9.0.2
+- coverage 7.13.4
+- pytest-cov 7.0.0
+- behave 1.3.3
+- colorama 0.4.6
+- iniconfig 2.3.0
+- pluggy 1.6.0
+- Pygments 2.19.2
+- flask 2.3.2
 
 ### Preparación del entorno
 1. Clonar este repositorio: `git clone https://github.com/IngSoftAvanz/healthcalc.git`
@@ -319,6 +345,7 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 - Ejecutar la aplicación: `python main.py <número>`
 - Ejecutar los tests: `pytest -v`
 - Ejecutar los tests con informe de cobertura: `pytest -v --cov=factorial --cov-report=html tests/`
+- Ejecutar aplicación web: `python mainweb.py` y abrir la URL proporcionada en la terminal
 
 </details>
 
@@ -343,5 +370,308 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 - Ejecutar la aplicación: Clic en Run usando el IDE.
 - Ejecutar los tests: Clic en Run Tests usando el IDE o con Maven: `mvn test`
 - Ejecutar los tests con informe de cobertura (previamente configurado en pom.xml): `mvn test`
+
+</details>
+
+## Especificación
+
+<details>
+<summary><b>Casos de Uso</b></summary>
+
+![Diagrama de Casos de Uso](doc/Casos_de_Uso_All_Must_Coloreados.png)
+- [Caso de Uso: BMI](doc/Caso_uso_BMI.txt)
+- [Caso de Uso: WHR](doc/Caso_Uso_WHR.txt)
+- [Caso de Uso: IBW](doc/Caso_uso_Lorentz.txt)
+</details>
+
+## Behaviour Driven Development  
+
+<details>
+<summary><b>BMI</b></summary>
+
+### Feature: Cálculo del BMI
+
+- **Archivo .feature:** [python-project-healthcalc/features/calcBMI.feature](python-project-healthcalc/features/calcBMI.feature)
+- **Historia de usuario:** 
+
+    ```
+    As usuario de la calculadora
+    I want calcular el índice de masa corporal
+    So that conocer mi estado de salud mediante la métrica elegida
+    ```
+
+#### Escenarios de Error Handling (BMI)
+
+1. Cálculo de BMI con peso anumérico
+2. Cálculo de BMI con altura anumérica
+3. Cálculo de BMI con peso cero
+4. Cálculo de BMI con altura cero
+5. Cálculo de BMI con peso negativo
+6. Cálculo de BMI con altura negativa
+7. Cálculo de BMI con peso exorbitante
+8. Cálculo de BMI con altura exorbitante
+9. Cálculo de BMI con peso desbordado por encima
+10. Cálculo de BMI con peso desbordado por debajo
+11. Cálculo de BMI con altura desbordada por encima
+12. Cálculo de BMI con altura desbordada por debajo
+
+#### Escenario de Performance (BMI)
+
+- Cálculo de BMI con valores normales
+
+#### Scenario Outline (BMI)
+
+- Cálculo de BMI con valores de peso y altura válidos
+
+### Feature: Obtención de la clasificación BMI
+
+- **Archivo .feature:** [python-project-healthcalc/features/clasBMI.feature](python-project-healthcalc/features/clasBMI.feature)
+- **Historia de usuario:** 
+    
+    ```
+    As usuario de la calculadora
+    I want obtener mi clasificación BMI
+    So that conocer mi estado de salud
+    ```
+
+#### Escenarios de Error Handling (clasificación BMI)
+
+1. Clasificación con BMI negativo
+2. Clasificación con BMI exorbitante
+
+#### Scenario Outline (clasificación BMI)
+
+- Clasificación BMI con valores normales de BMI
+
+</details>
+
+<details>
+<summary><b>IBW</b></summary>
+
+### Feature: Cálculo del IBW
+
+- **Archivo .feature:** [python-project-healthcalc/features/calcIBW.feature](python-project-healthcalc/features/calcIBW.feature)
+- **Historia de usuario:** 
+    
+    ```
+    As usuario de la calculadora
+    I want calcular el peso ideal corporal
+    So that conocer mi estado de salud mediante la métrica elegida
+    ```
+
+#### Escenarios de Error Handling (IBW)
+
+1. Cálculo de IBW con sexo inválido
+2. Cálculo de IBW con altura anumérica
+3. Cálculo de IBW con altura cero
+4. Cálculo de IBW con altura negativa
+5. Cálculo de IBW con altura por debajo del rango biológico
+6. Cálculo de IBW con altura por encima del rango biológico
+
+#### Escenario de Performance (IBW)
+
+- Cálculo de IBW con valores normales
+
+#### Scenario Outline (IBW)
+
+- Cálculo de IBW con valores de altura y sexo válidos
+
+</details>
+
+<details>
+<summary><b>WHR</b></summary>
+
+### Feature: Cálculo del WHR
+- **Archivo .feature:** [python-project-healthcalc/features/calcWHR.feature](python-project-healthcalc/features/calcWHR.feature)
+- **Historia de usuario:**
+
+    ```
+    As usuario de la calculadora
+    I want to calcular el ratio cintura-cadera
+    So that conocer mi estado de salud mediante la métrica elegida
+    ```
+
+#### Escenarios de Error Handling (WHR)
+
+1. Cálculo del WHR con perímetro de cintura anumérico
+2. Cálculo de WHR con perímetro de cadera anumérico
+3. Cálculo de WHR con perímetro de cintura cero
+4. Cálculo de WHR con perímetro de cadera cero
+5. Cálculo de WHR con perímetro de cintura negativo
+6. Cálculo de WHR con perímetro de cadera negativo
+7. Cálculo de WHR con perímetro de cintura exorbitante
+8. Cálculo de WHR con perímetro de cadera exorbitante
+9. Cálculo de WHR con perímetro de cintura desbordado
+10. Cálculo de WHR con perímetro de cadera desbordado
+11. Cálculo de WHR con perímetro de ambos desbordado
+
+#### Escenario de Performance (WHR)
+
+- Cálculo de WHR con perímetro de ambos igual
+
+#### Scenario Outline (WHR)
+- Cálculo de WHR con valores de cintura y cadera válido
+
+### Feature: Clasificación WHR
+- **Archivo.feature:** [python-project-healthcalc/features/clasWHR.feature](python-project-healthcalc/features/clasWHR.feature)
+- **Historia de usuario:**
+
+    ```
+    As usuario de la calculadora
+    I want to obtener mi clasificación WHR
+    So that conocer mi morfología y estado de salud
+    ```
+
+#### Escenarios de Error Handling (clasificación WHR)
+1. Clasificación con WHR negativo
+2. Clasificación con WHR exorbitante
+3. Clasificación con sexo inválido
+
+#### Scenario Outline (clasificación WHR)
+- Clasificación con sexo y WHR normales
+
+</details>
+
+## Interfaz gráfica de usuario
+
+![Implementación de la aplicacion web](doc/gui/Implementacion.png)
+
+## Práctica 6: Patrones de diseño
+
+### Apartado 2. Patrón Singleton
+
+![Patrón Singleton](design_patterns/Patron_Singular.png)
+
+### Apartado 3a. Patrón Adapter
+
+![Patrón Adapter](design_patterns/Patron_Adapter.png)
+
+### Apartado 3b. Patrón Proxy
+
+![Patrón Proxy](design_patterns/Patron_Proxy.png)
+
+### Apartado 3c. Patrón Decorator
+
+![Patrón Decorator](design_patterns/Patron_Decorator.png)
+
+## Práctica 7: Refactorings
+
+<details>
+<summary><b>Primitive Obsession</b></summary>
+
+* **Refactoring aplicado:**
+    * Replace Type Code with Enum
+    
+* **Tipo:**
+    * Attribute Refactoring
+        
+* **Descripción:**
+Se sustituyeron valores primitivos representados mediante strings ("M", "F", "Pear", "Apple", etc.) por enums tipados como Gender, BMICategory, WHRCategory, Language y UnitSystem. Esto mejora la legibilidad, reduce errores relacionados con comparaciones de cadenas y permite un mayor control de tipos dentro del dominio de la aplicación.
+
+* **Cambios manuales:**
+    * Creación de 5 enums
+    * Modificación de imports y comparaciones relacionadas
+    * Adaptación de tests y métodos afectados
+ 
+</details>
+<details>
+<summary><b>Large Class / Divergent Change</b></summary>
+
+* **Refactoring aplicado:**
+    * Extract Interface
+    
+* **Tipo:**
+    * Class Refactoring
+        
+* **Descripción:**
+Se separaron las distintas responsabilidades de cálculo creando interfaces independientes como IdealBodyWeight y WaistHipRatio. 
+Esto permite desacoplar funcionalidades y adaptar el diseño al nuevo esquema UML proporcionado en la práctica.
+
+* **Cambios manuales:**
+    * Creación de 2 interfaces nuevas
+    * Reorganización inicial de responsabilidades
+ 
+</details>
+<details>
+<summary><b>Shotgun Surgery</b></summary>
+
+* **Refactoring aplicado:**
+    * Introduce Parameter Object
+    * Move Method
+    
+* **Tipo:**
+    * Method Refactoring
+        
+* **Descripción:**
+    * Crear HealthData.py como objeto parámetro para agrupar peso, altura, sexo, cintura, cadera y sistema de unidades.
+    * Refactorizar clases Adapter,Proxy, Decorators y may para que utilicen ese objeto.
+
+* **Cambios manuales:**
+    * 1 archivo nuevo: HealthData.py
+    * 11 archivos refactorizados: (__init__.py, health_hospital.py, BaseDecoratorRegion.py, BaseDecoratorLanguage.py, Adapter.py, Proxy.py, DecoratorEU.py, DecoratorUSA.py, DecoratorEnglish.py, DecoratorEspanol.py, main.py)
+ 
+</details>
+<details>
+<summary><b>Data Clumps</b></summary>
+
+* **Refactoring aplicado:**
+    * Extract Class
+    * Introduce Parameter Object
+    
+* **Tipo:**
+    * Class Refactoring / Method Refactoring
+        
+* **Descripción:**
+Se identificaron múltiples grupos de datos que aparecían repetidamente en distintos métodos y clases del sistema, como peso y altura, cintura y cadera, o género y altura. Para corregir este problema se utilizó la clase HealthData como objeto parámetro, agrupando toda la información relacionada con los datos de salud de una persona. Posteriormente se refactorizaron los métodos de cálculo (BMI, Lorentz y WHR), así como el main y los tests, para que utilizaran objetos HealthData en lugar de listas de parámetros primitivas.
+
+* **Cambios manuales:**
+    * Refactorización de métodos de HealthCalc y HealthCalcImpl para utilizar HealthData
+    * Actualización de Adapter, Decorators y main
+    * Adaptación de tests y métodos afectados
+    * Eliminación de grupos repetidos de parámetros en llamadas a métodos
+ 
+</details>
+<details>
+<summary><b>Long Method</b></summary>
+
+* **Refactoring aplicado:**
+    * Extract Method
+    * Replace Inline Code with Function Call
+    
+* **Tipo:**
+    * Class Refactoring / Method Refactoring
+        
+* **Descripción:**
+El método main() había crecido hasta superar ampliamente las 200 líneas, mezclando lógica de interacción con el usuario, validación de entradas, cálculos de métricas (BMI, IBW, WHR), gestión de estadísticas y ejecución de pruebas de patrones de diseño. Este tamaño excesivo dificultaba la lectura, el mantenimiento y la extensibilidad del código, además de violar el principio de responsabilidad única. Para corregirlo, se aplicó Extract Method, dividiendo el método en múltiples funciones pequeñas y cohesionadas. Posteriormente se sustituyeron los bloques de código originales por llamadas a estas nuevas funciones, reduciendo el main a un punto de orquestación claro y legible.
+
+* **Cambios manuales:**
+    * Creación de funciones auxiliares para validación (ask_float, ask_yes_no, ask_gender)
+    * Extracción de la lógica de métricas en funciones independientes (interactive_bmi, interactive_ibw, interactive_whr)
+    * Creación de run_interactive_loop() para encapsular el bucle principal
+    * Creación de show_final_stats() y run_pattern_tests()
+    * Sustitución del código inline del main por llamadas a las nuevas funciones
+    * Reducción del método main() a ~15 líneas, actuando únicamente como coordinador del flujo
+
+</details>
+<details>
+<summary><b>Code Duplication / Repeated Validation Logic</b></summary>
+
+* **Refactoring aplicado:**
+    * Extract Method
+    * Consolidate Duplicate Conditional Fragments
+    * Replace Inline Code with Function Call
+    
+* **Tipo:**
+    * Method Refactoring
+        
+* **Descripción:**
+La clase HealthCalcImpl contenía múltiples fragmentos de código duplicado relacionados con validaciones numéricas, comprobaciones de positividad y verificación de rangos biológicos. Estas validaciones aparecían repetidas en los métodos bmi(), lorentz(), whr() y whr_classification(), lo que dificultaba el mantenimiento y aumentaba el riesgo de inconsistencias al modificar reglas de validación. Para resolver este problema se extrajeron métodos auxiliares privados (_to_float, _validate_positive, _validate_range) que centralizan toda la lógica repetida. Esto reduce la duplicación, mejora la cohesión y permite modificar las reglas de validación en un único punto.
+
+* **Cambios manuales:**
+    * Creación de métodos auxiliares privados para validación (_to_float, _validate_positive, _validate_range)
+    * Sustitución de bloques repetidos de try/except y comprobaciones de rango por llamadas a los nuevos métodos
+    * Simplificación de los métodos bmi(), lorentz(), whr() y whr_classification()
+    * Eliminación de duplicación estructural y semántica en validaciones numéricas y de rangos
+    * Mejora de la legibilidad y mantenibilidad de la clase HealthCalcImpl
 
 </details>

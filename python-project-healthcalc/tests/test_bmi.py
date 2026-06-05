@@ -1,7 +1,8 @@
 import pytest
 from healthcalc.health_calc_impl import HealthCalcImpl
 from healthcalc.exceptions import InvalidHealthDataException
-
+from healthcalc.BMICategory import BMICategory
+from healthcalc.HealthData  import HealthData
 
 class TestBMI:
 
@@ -17,7 +18,7 @@ class TestBMI:
         height = 1.75
         expected_bmi = 70.0 / (1.75 ** 2)
 
-        result = self.health_calc.bmi(weight, height)
+        result = self.health_calc.bmi(HealthData(weight=weight, height=height))
 
         # pytest.approx es el equivalente a assertEquals con delta (0.01) en JUnit
         assert result == pytest.approx(expected_bmi, abs=0.01)
@@ -28,12 +29,12 @@ class TestBMI:
         height = 1.70
 
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.bmi(weight, height)
+            self.health_calc.bmi(HealthData(weight=weight, height=height))
 
     def test_bmi_altura_cero(self):
         """Lanzar excepción cuando la altura es cero"""
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.bmi(70, 0)
+            self.health_calc.bmi(HealthData(weight=70, height=0))
 
     def test_bmi_negativos(self):
         """Lanzar excepción cuando los valores son negativos (Equivalente a assertAll)"""
@@ -41,17 +42,17 @@ class TestBMI:
         height = 1.70
 
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.bmi(weight, height)
+            self.health_calc.bmi(HealthData(weight=weight, height=height))
 
         weight = -70
         height = -1.70
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.bmi(weight, height)
+            self.health_calc.bmi(HealthData(weight=weight, height=height))
 
         weight = 70
         height = -1.70
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.bmi(weight, height)
+            self.health_calc.bmi(HealthData(weight=weight, height=height))
 
     # --- Tests de Límites e Invalidación para el BMI ---
 
@@ -61,7 +62,7 @@ class TestBMI:
         height = 1.70
 
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.bmi(weight, height)
+            self.health_calc.bmi(HealthData(weight=weight, height=height))
 
     @pytest.mark.parametrize("weight", [700.1, 1000.0, 5000.0], ids=lambda x: f"Peso máximo inválido: {x}kg")
     def test_peso_maximo_imposible(self, weight: float):
@@ -69,7 +70,7 @@ class TestBMI:
         height = 1.70
 
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.bmi(weight, height)
+            self.health_calc.bmi(HealthData(weight=weight, height=height))
 
     @pytest.mark.parametrize("height", [-0.50, 0.0, 0.29], ids=lambda x: f"Altura mínima inválida: {x}m")
     def test_altura_minima_imposible(self, height: float):
@@ -77,7 +78,7 @@ class TestBMI:
         weight = 70
 
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.bmi(weight, height)
+            self.health_calc.bmi(HealthData(weight=weight, height=height))
 
     @pytest.mark.parametrize("height", [3.01, 3.50, 5.00], ids=lambda x: f"Altura máxima inválida: {x}m")
     def test_altura_maximo_imposible(self, height: float):
@@ -85,41 +86,53 @@ class TestBMI:
         weight = 70
         
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.bmi(weight, height)
+            self.health_calc.bmi(HealthData(weight=weight, height=height))
 
     # casos específicos para cubrir cada lado del OR en los límites biológicos
     def test_bmi_peso_menor_que_uno(self):
         """Peso mayor que 0 pero menor que 1 debe fallar en el rango biológico."""
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.bmi(0.5, 1.70)
+            self.health_calc.bmi(HealthData(weight=0.5, height=1.70))
 
     def test_bmi_altura_menor_que_minima(self):
         """Altura mayor que 0 pero menor que 0.30 debe fallar en el rango biológico."""
         with pytest.raises(InvalidHealthDataException):
-            self.health_calc.bmi(70, 0.20)
+            self.health_calc.bmi(HealthData(weight=70, height=0.20))
 
 
     # --- Tests de Clasificación básica a partir del BMI ---
     
-    @pytest.mark.parametrize("bmi", [10.0, 18.4, 18.49], ids=lambda x: f"BMI {x} -> Underweight")
-    def test_bmi_underweight(self, bmi: float):
-        """Cálculo de clasificación BMI para Underweight."""
-        assert self.health_calc.bmi_classification(bmi) == "Underweight"
+    @pytest.mark.parametrize("bmi", [10.0, 15.0, 15.99], ids=lambda x: f"BMI {x} -> Severe Thinness")
+    def test_bmi_severe_thinness(self, bmi: float):
+        assert (self.health_calc.bmi_classification(bmi) == BMICategory.SEVERE_THINNESS)
 
-    @pytest.mark.parametrize("bmi", [18.5, 22.0, 24.9, 24.99], ids=lambda x: f"BMI {x} -> Normal weight")
-    def test_bmi_normal_weight(self, bmi: float):
-        """Cálculo de clasificación BMI para Normal weight."""
-        assert self.health_calc.bmi_classification(bmi) == "Normal weight"
+    @pytest.mark.parametrize("bmi", [16.0, 16.5, 16.99], ids=lambda x: f"BMI {x} -> Moderate Thinness")
+    def test_bmi_moderate_thinness(self, bmi: float):
+        assert (self.health_calc.bmi_classification(bmi) == BMICategory.MODERATE_THINNESS)
+    
+    @pytest.mark.parametrize("bmi", [17.0, 18.0, 18.49], ids=lambda x: f"BMI {x} -> Mild Thinness")
+    def test_bmi_mild_thinness(self, bmi: float):
+        assert (self.health_calc.bmi_classification(bmi) == BMICategory.MILD_THINNESS)
 
-    @pytest.mark.parametrize("bmi", [25.0, 27.5, 29.9, 29.99], ids=lambda x: f"BMI {x} -> Overweight")
+    @pytest.mark.parametrize("bmi", [18.5, 24.99], ids=lambda x: f"BMI {x} -> Normal")
+    def test_bmi_normal(self, bmi: float):
+        assert (self.health_calc.bmi_classification(bmi) == BMICategory.NORMAL)
+
+    @pytest.mark.parametrize("bmi", [25.0, 29.99], ids=lambda x: f"BMI {x} -> Overweight")
     def test_bmi_overweight(self, bmi: float):
-        """Cálculo de clasificación BMI para Overweight."""
-        assert self.health_calc.bmi_classification(bmi) == "Overweight"
+        assert (self.health_calc.bmi_classification(bmi) == BMICategory.OVERWEIGHT)
+    
+    @pytest.mark.parametrize("bmi", [30.0, 34.99], ids=lambda x: f"BMI {x} -> Obese Class I")
+    def test_bmi_obese_class_i(self, bmi: float):
+        assert (self.health_calc.bmi_classification(bmi) == BMICategory.OBESE_CLASS_I)
 
-    @pytest.mark.parametrize("bmi", [30.0, 35.0, 50.0], ids=lambda x: f"BMI {x} -> Obesity")
-    def test_bmi_obesity(self, bmi: float):
-        """Cálculo de clasificación BMI para Obesity."""
-        assert self.health_calc.bmi_classification(bmi) == "Obesity"
+    @pytest.mark.parametrize("bmi", [35.0, 39.99], ids=lambda x: f"BMI {x} -> Obese Class II")
+    def test_bmi_obese_class_ii(self, bmi: float):
+        assert (self.health_calc.bmi_classification(bmi) == BMICategory.OBESE_CLASS_II)
+
+    @pytest.mark.parametrize("bmi", [40.0, 100.0], ids=lambda x: f"BMI {x} -> Obese Class III")
+    def test_bmi_obese_class_iii(self, bmi: float):
+        assert (self.health_calc.bmi_classification(bmi) == BMICategory.OBESE_CLASS_III)
 
     # --- Tests de Límites e Invalidación para la clasificación BMI ---
 
