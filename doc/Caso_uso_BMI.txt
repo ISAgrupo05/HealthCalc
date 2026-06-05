@@ -1,0 +1,48 @@
+Caso de uso BMI: Calcular BMI
+
+- Actor Principal: Usuario de la calculadora
+
+- Ámbito (Scope): Calculadora
+
+- Nivel (Level): Objetivo de usuario
+
+- Stakeholders e intereses:
+    · Usuario: Obtener un cálculo preciso del BMI
+    · App calculadora: Aportar una métrica fiable y mostrar conclusiones de los resultados
+
+- Precondiciones:
+    -> El usuario debe introducir datos válidos de peso y altura
+    -> La calculadora debe funcionar correctamente a la hora de realizar cálculos
+
+- Garantías mínimas:
+    * El usuario puede volver a introducir valores aunque el cálculo no se haya realizado
+
+- Garantía de éxito:
+    * La calculadora obtiene correctamente la métrica BMI
+
+- Disparador: El usuario introduce los valores de peso y altura
+
+- Escenario principal:
+   1. El sistema solicita al usuario ingresar su peso en kilogramos
+   2. El usuario introduce su peso
+   3. El sistema solicita al usuario ingresar altura en metros
+   4. El usuario introduce su altura
+   5. El sistema calcula el BMI y muestra el resultado obtenido y su interpretación por pantalla
+   6. El flujo continúa al siguiente cálculo o finaliza según la respuesta del usuario
+
+- Extensiones:
+  1a. Peso inválido
+      · El sistema detecta un valor no numérico
+      · El sistema muestra el mensaje: "Value must be a number, try again"
+      · Vuelve al paso 1
+
+  2a. Altura inválida
+      · El sistema detecta un valor no numérico
+      · El sistema muestra el mensaje: "Value must be a number, try again"
+      · Vuelve al paso 1
+
+  5a. Datos de salud inválidos:
+      · El sistema obtiene un cálculo de BMI inválido (números negativos o fuera de rango)
+      · El sistema muestra "Invalid Health data, try again"
+      · Vuelve al paso 1
+ 

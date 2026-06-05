@@ -181,6 +181,27 @@ Para que el proyecto cumpla con estándares de software médico, se deben inclui
     - **Fuerte** (ejercicio 6-7 días/semana): `TMB × 1.725`
     - **Muy fuerte** (atleta o trabajo físico pesado): `TMB × 1.9`
 
+---
+
+* **M12: Malnutrition Universal Screening Tool (MUST):** El MUST es un instrumento de cribado clínico que permite identificar a adultos malnutridos, con riesgo de desnutrición u obesos. Se mide mediante las siguientes puntuaciones:
+
+    1. **Puntuación del IMC:**
+        - IMC superior a 20 = 0 puntos
+        - IMC entre 18.5 y 20 = 1 punto
+        - IMC inferior a 18.5 = 2 puntos
+    2. **Puntuación por el porcentaje de pérdida de peso en los últimos 3-6 meses:**
+        - Menos del 5% = 0 puntos
+        - Entre el 5% y el 10% = 1 punto
+        - Más del 10% = 2 puntos
+    3. **Puntuación del efecto de las enfermedades agudas:**
+        - Si el paciente está muy enfermo y no ha habido, o es probable que no vaya a haber, aporte nutricional durante más de 5 días = 2 puntos
+
+Al sumar las puntuaciones, se puede clasificar el riesgo global de malnutrición:
+
+- **0** = Riesgo bajo, recomendada asistencia clínica habitual.
+- **1** = Riesgo intermedio, recomendada observación.
+- **2 o más** = Riesgo alto, recomendada intervención lo antes posible.
+
 </details>
 
 <details>
@@ -343,5 +364,17 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 - Ejecutar la aplicación: Clic en Run usando el IDE.
 - Ejecutar los tests: Clic en Run Tests usando el IDE o con Maven: `mvn test`
 - Ejecutar los tests con informe de cobertura (previamente configurado en pom.xml): `mvn test`
+
+</details>
+
+## Especificación
+
+<details>
+<summary><b>Casos de Uso</b></summary>
+
+![Diagrama de Casos de Uso](doc/Casos_de_Uso_All_Must_Coloreados.png)
+- [Caso de Uso: BMI](doc/Caso_uso_BMI.txt)
+- [Caso de Uso: WHR](doc/Caso_Uso_WHR.txt)
+- [Caso de Uso: IBW](doc/Caso_uso_Lorentz.txt)
 
 </details>
