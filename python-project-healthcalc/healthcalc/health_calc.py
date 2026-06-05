@@ -1,60 +1,59 @@
 from abc import ABC, abstractmethod
-from healthcalc import InvalidHealthDataException
+from .BMICategory import BMICategory
+from .WHRCategory import WHRCategory
+from .HealthData import HealthData
 
 
 class HealthCalc(ABC):
     """Interface for the calculator of health parameters."""
 
     @abstractmethod
-    def bmi_classification(self, bmi: float) -> str:
+    def bmi_classification(self, bmi: float) -> BMICategory:
         """Calculate the BMI classification of a person.
 
         :param bmi: Body Mass Index (kg/m2)
-        :return: String classification
+        :return: BMICategory classification
         :raises InvalidHealthDataException: If data is out of range
         """
         pass
 
     @abstractmethod
-    def bmi(self, weight: float, height: float) -> float:
+    def bmi(self, health_data: HealthData) -> float:
         """Calculate the Body Mass Index (BMI).
         
-        :param weight: Weight (kg)
-        :param height: Height (m)
+        :param health_data: HealthData object containing weight and height
         :return: BMI value (kg/m2)
         :raises InvalidHealthDataException: If data is out of range
         """
         pass
 
     @abstractmethod
-    def lorentz(self, sex: str, height: float) -> float:
+    def lorentz(self, health_data: HealthData) -> float:
         """Calculate the Ideal Body Weight (IBW).
         
-        :param sex: String Sex (M/F)
-        :param height: Height (m)
+        :param health_data: HealthData object containing gender and height
         :return: Lorentz value (kg)
         :raises InvalidHealthDataException: If data is out of range
         """
         pass
 
     @abstractmethod
-    def whr(self, waist: float, hip: float) -> float:
+    def whr(self, health_data: HealthData) -> float:
         """Calculate the Waist-to-Hip Ratio (WHR).
         
-        :param waist: Waist (m)
-        :param hip: Hip (m)
+        :param health_data: HealthData object containing waist and hip measurements
         :return: WHR value
         :raises InvalidHealthDataException: If data is out of range
         """
         pass
 
     @abstractmethod
-    def whr_classification(self, sex: str, whr: float) -> str:
+    def whr_classification(self, health_data: HealthData, whr: float) -> WHRCategory:
         """Calculate the WHR classification of a person.
         
-        :param sex: String Sex (M/F)
+        :param health_data: HealthData object containing gender
         :param whr: WHR value
-        :return: String Classification
+        :return: WHRCategory classification
         :raises InvalidHealthDataException: If data is out of range
         """
         pass

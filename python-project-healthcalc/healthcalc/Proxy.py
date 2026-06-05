@@ -1,40 +1,26 @@
+from .HealthData import HealthData
 from .health_hospital import HealthHospital
 
 
 class HealthCalcProxy(HealthHospital):
 
     def __init__(self, healthH, stats):
-
         self.healthH = healthH
         self.stats = stats
 
-    def indiceMasaCorporal(self, peso, altura):
-
-        result = self.healthH.indiceMasaCorporal(
-            peso,
-            altura
-        )
-
+    def indiceMasaCorporal(self, health_data: HealthData):
+        result = self.healthH.indiceMasaCorporal(health_data)
         imc = result[0]
-
+        metric_data = health_data.normalize()
         self.stats.addPaciente(
-            peso=peso,
-            altura=altura,
-            imc=imc
+            metric_data, imc
         )
-
         return result
 
-    def pesoCorporalIdeal(self, sexo, altura):
-
-        result = self.healthH.pesoCorporalIdeal(
-            sexo,
-            altura
-        )
-
+    def pesoCorporalIdeal(self, health_data: HealthData):
+        result = self.healthH.pesoCorporalIdeal(health_data)
+        metric_data = health_data.normalize()
         self.stats.addPaciente(
-            altura=altura,
-            sexo=sexo
+            metric_data, None
         )
-
         return result
